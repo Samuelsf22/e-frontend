@@ -41,7 +41,7 @@
 }
 
 .dark {
-    --background: 0.00 0.00% 0.00%;
+    --background: 60.00 100.00% 0.00%;
     --foreground: 202.94 80.95% 91.76%;
     
     --primary: 202.89 100.00% 44.71%;
@@ -75,6 +75,9 @@
 
 @layer base {
 * {
-@apply border-border;
-}
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
