@@ -1,5 +1,4 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { featherSun, featherMoon } from '@ng-icons/feather-icons';
@@ -7,7 +6,7 @@ import { featherSun, featherMoon } from '@ng-icons/feather-icons';
 @Component({
   selector: 'theme-toggle',
   templateUrl: './theme-toggle.component.html',
-  imports: [NgIcon, CommonModule, HlmButtonDirective],
+  imports: [NgIcon, HlmButtonDirective],
   viewProviders: [provideIcons({ featherSun, featherMoon })],
 })
 export class ThemeToggleComponent implements OnInit {
