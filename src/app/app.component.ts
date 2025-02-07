@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HlmButtonDirective, ThemeToggleComponent],
+  imports: [RouterOutlet, ThemeToggleComponent, FooterComponent],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
