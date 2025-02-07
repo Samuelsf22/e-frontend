@@ -5,7 +5,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { featherSun, featherMoon } from '@ng-icons/feather-icons';
 
 @Component({
-  selector: 'app-theme-toggle',
+  selector: 'theme-toggle',
   templateUrl: './theme-toggle.component.html',
   imports: [NgIcon, CommonModule, HlmButtonDirective],
   viewProviders: [provideIcons({ featherSun, featherMoon })],
