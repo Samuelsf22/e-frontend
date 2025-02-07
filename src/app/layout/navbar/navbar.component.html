@@ -1,0 +1,31 @@
+<header
+  class="fixed flex items-center justify-between w-full backdrop-blur-md py-4 px-4"
+>
+  <nav class="flex max-w-7xl mx-auto items-center justify-between w-full">
+    <a href="/"> <span class="text-2xl font-semibold">E-commerce</span></a>
+    <div>
+      <a href="/">
+        <button hlmBtn variant="link" class="font-semibold">Home</button>
+      </a>
+      <button
+        hlmBtn
+        variant="link"
+        class="font-semibold"
+        [brnMenuTriggerFor]="menu"
+      >
+        Products
+      </button>
+      <ng-template #menu>
+        <hlm-menu>
+          <button hlmMenuItem>
+            <span>Product 1</span>
+          </button>
+          <button hlmMenuItem>
+            <span>Product 2</span>
+          </button>
+        </hlm-menu>
+      </ng-template>
+    </div>
+    <theme-toggle />
+  </nav>
+</header>
