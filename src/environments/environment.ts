@@ -1,3 +1,6 @@
+const SERVER_URL = 'http://localhost:8080';
+
 export const environment = {
-  apiUrl: 'http://localhost:8080/api',
+  apiUrl: `${SERVER_URL}/api`,
+  authUrl: `${SERVER_URL}/auth`,
 };
