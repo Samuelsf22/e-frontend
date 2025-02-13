@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenService {
+  router: Router = inject(Router);
+
   setToken(token: string): void {
     localStorage.setItem('AuthToken', token);
   }
@@ -14,5 +17,6 @@ export class TokenService {
 
   logOut(): void {
     localStorage.removeItem('AuthToken');
+    this.router.navigate(['/']);
   }
 }
