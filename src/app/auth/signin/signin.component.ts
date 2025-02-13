@@ -1,7 +1,7 @@
 import { TokenService } from '@/shared/service/token.service';
 import { Component, inject } from '@angular/core';
 import { AuthService } from '@service/auth.service';
-import { Router } from 'express';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { HlmFormFieldModule } from '@spartan-ng/ui-formfield-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
@@ -19,6 +19,7 @@ import {
 } from '@spartan-ng/brain/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'signin',
