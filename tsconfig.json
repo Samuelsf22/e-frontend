@@ -41,10 +41,10 @@
         "./libs/ui/ui-formfield-helm/src/index.ts"
       ],
       "@spartan-ng/ui-input-helm": [
-        ".\\libs/ui/ui-input-helm/src/index.ts"
+        "./libs/ui/ui-input-helm/src/index.ts"
       ],
       "@spartan-ng/ui-card-helm": [
-        ".\\libs/ui/ui-card-helm/src/index.ts"
+        "./libs/ui/ui-card-helm/src/index.ts"
       ]
     }
   },
