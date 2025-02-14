@@ -5,9 +5,8 @@ import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import {
   HlmMenuComponent,
   HlmMenuItemDirective,
-
 } from '@spartan-ng/ui-menu-helm';
-
+import { SigninComponent } from '@auth/signin/signin.component';
 @Component({
   selector: 'e-navbar',
   imports: [
@@ -16,6 +15,7 @@ import {
     BrnMenuTriggerDirective,
     HlmMenuComponent,
     HlmMenuItemDirective,
+    SigninComponent,
   ],
   standalone: true,
   templateUrl: './navbar.component.html',

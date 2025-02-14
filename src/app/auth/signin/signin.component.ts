@@ -1,25 +1,36 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '@service/auth.service';
 
-import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HlmFormFieldModule } from '@spartan-ng/ui-formfield-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
-import {
-  HlmCardDirective,
-  HlmCardContentDirective,
-  HlmCardHeaderDirective,
-  HlmCardTitleDirective,
-  HlmCardDescriptionDirective,
-} from '@spartan-ng/ui-card-helm';
+
 import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
 } from '@spartan-ng/brain/forms';
+import {
+  BrnDialogCloseDirective,
+  BrnDialogContentDirective,
+  BrnDialogTriggerDirective,
+
+} from '@spartan-ng/brain/dialog';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import {
+  HlmDialogComponent,
+  HlmDialogContentComponent,
+  HlmDialogDescriptionDirective,
+  HlmDialogFooterComponent,
+  HlmDialogHeaderComponent,
+  HlmDialogTitleDirective,
+} from '@spartan-ng/ui-dialog-helm';
+
 import { FormBuilder, Validators } from '@angular/forms';
 import { injectMutation } from '@tanstack/angular-query-experimental';
 import { Login } from '@shared/model/user.model';
 import { lastValueFrom } from 'rxjs';
+import { HlmPDirective } from '@spartan-ng/ui-typography-helm';
 
 @Component({
   selector: 'signin',
@@ -28,12 +39,18 @@ import { lastValueFrom } from 'rxjs';
     HlmFormFieldModule,
     HlmInputDirective,
     HlmButtonModule,
-    HlmCardDirective,
-    HlmCardContentDirective,
-    HlmCardHeaderDirective,
-    HlmCardTitleDirective,
-    HlmCardDescriptionDirective,
-  ],
+    BrnDialogTriggerDirective,
+    BrnDialogContentDirective,
+    BrnDialogCloseDirective,
+    HlmDialogComponent,
+    HlmDialogContentComponent,
+    HlmDialogHeaderComponent,
+    HlmDialogTitleDirective,
+    HlmDialogDescriptionDirective,
+    HlmDialogFooterComponent,
+    HlmButtonDirective,
+    HlmPDirective,
+],
   templateUrl: './signin.component.html',
   providers: [
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
@@ -42,8 +59,6 @@ import { lastValueFrom } from 'rxjs';
 export class SigninComponent {
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
-
-  fb = inject(NonNullableFormBuilder);
 
   form = this._formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -55,9 +70,13 @@ export class SigninComponent {
   }));
 
   onSubmitLogin = () => {
-    this.loginMutation.mutate({
-      email: this.form.value.email ?? '',
-      password: this.form.value.password ?? '',
-    });
+    if (this.form.valid) {
+      this.loginMutation.mutate({
+        email: this.form.value.email!,
+        password: this.form.value.password!,
+      });
+    } else {
+      this.form.markAllAsTouched();
+    }
   };
 }
