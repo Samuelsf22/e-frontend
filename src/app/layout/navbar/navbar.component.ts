@@ -9,6 +9,9 @@ import {
 import { SigninComponent } from '@auth/signin/signin.component';
 import { AuthService } from '@shared/service/auth.service';
 import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
+
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { featherUserCheck, featherUserPlus } from '@ng-icons/feather-icons';
 @Component({
   selector: 'e-navbar',
   imports: [
@@ -17,9 +20,11 @@ import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
     BrnMenuTriggerDirective,
     HlmMenuComponent,
     HlmMenuItemDirective,
+    NgIcon,
   ],
   standalone: true,
   templateUrl: './navbar.component.html',
+  viewProviders: [provideIcons({ featherUserCheck, featherUserPlus })],
 })
 export class NavbarComponent {
   private authService = inject(AuthService);

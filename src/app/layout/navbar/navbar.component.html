@@ -33,9 +33,15 @@
       </button>
       <ng-template #userMenu>
         <hlm-menu>
-          <button hlmMenuItem (click)="openSignInComponent()">Sign In</button>
+          <button hlmMenuItem class="flex items-center gap-4" (click)="openSignInComponent()">
+            <ng-icon name="featherUserCheck" />
+            Sign In
+          </button>
           <a href="/signup">
-            <button hlmMenuItem>Sign Up</button>
+            <button hlmMenuItem class="flex items-center gap-4">
+              <ng-icon name="featherUserPlus" />
+              Sign Up
+            </button>
           </a>
         </hlm-menu>
       </ng-template>

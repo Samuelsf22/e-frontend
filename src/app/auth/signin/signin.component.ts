@@ -11,15 +11,10 @@ import {
   ShowOnDirtyErrorStateMatcher,
 } from '@spartan-ng/brain/forms';
 import {
-  BrnDialogCloseDirective,
   BrnDialogComponent,
-  BrnDialogContentDirective,
-  BrnDialogTriggerDirective,
 } from '@spartan-ng/brain/dialog';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
-  HlmDialogComponent,
-  HlmDialogContentComponent,
   HlmDialogDescriptionDirective,
   HlmDialogFooterComponent,
   HlmDialogHeaderComponent,
@@ -39,10 +34,6 @@ import { HlmPDirective } from '@spartan-ng/ui-typography-helm';
     HlmFormFieldModule,
     HlmInputDirective,
     HlmButtonModule,
-    BrnDialogTriggerDirective,
-    BrnDialogContentDirective,
-    HlmDialogComponent,
-    HlmDialogContentComponent,
     HlmDialogHeaderComponent,
     HlmDialogTitleDirective,
     HlmDialogDescriptionDirective,
