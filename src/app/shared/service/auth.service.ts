@@ -12,12 +12,18 @@ import { TokenService } from './token.service';
 export class AuthService {
   httpClient = inject(HttpClient);
   tokenService = inject(TokenService);
-
   SignIn = (login: Login): Observable<JwtToken> => {
     return this.httpClient
       .post<JwtToken>(`${environment.authUrl}/login`, login)
-      .pipe(tap((jwtToken) => {
-        jwtToken.token ? this.tokenService.setToken(jwtToken.token) : null;
-      }));
+      .pipe(
+        tap((jwtToken) => {
+          if (jwtToken.token) {
+            this.tokenService.setToken(jwtToken.token);
+            setTimeout(() => {
+              this.tokenService.logOut();
+            }, 3600 * 1000);
+          }
+        })
+      );
   };
 }

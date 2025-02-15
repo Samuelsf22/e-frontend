@@ -41,7 +41,6 @@ import { HlmPDirective } from '@spartan-ng/ui-typography-helm';
     HlmButtonModule,
     BrnDialogTriggerDirective,
     BrnDialogContentDirective,
-    BrnDialogCloseDirective,
     HlmDialogComponent,
     HlmDialogContentComponent,
     HlmDialogHeaderComponent,
