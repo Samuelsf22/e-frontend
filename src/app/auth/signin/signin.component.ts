@@ -10,9 +10,7 @@ import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
 } from '@spartan-ng/brain/forms';
-import {
-  BrnDialogComponent,
-} from '@spartan-ng/brain/dialog';
+import { BrnDialogComponent } from '@spartan-ng/brain/dialog';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmDialogDescriptionDirective,
@@ -59,10 +57,11 @@ export class SigninComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
+
   loginMutation = injectMutation(() => ({
     mutationFn: (login: Login) => lastValueFrom(this.authService.SignIn(login)),
     onSuccess: () => {
-      this.closeDialog();
+      window.location.reload();
     },
   }));
 

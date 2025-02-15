@@ -1,14 +1,15 @@
 export interface User {
-  id: number;
-  publicId: string;
-  firstName: string;
-  lastName: string;
+  id?: number;
+  publicId?: string;
+  first_name: string;
+  last_name: string;
   email: string;
   username: string;
+  password: string;
   address: string;
-  imageUrl: string;
-  roles: string;
-  authorities: Authority[];
+  image_url?: string;
+  roles?: string;
+  authorities?: Authority[];
 }
 
 export interface Authority {
