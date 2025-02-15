@@ -26,7 +26,10 @@
         </hlm-menu>
       </ng-template>
     </div>
+    @if(!isSignedIn){
     <signin />
+    <signup />
+    }
     <theme-toggle />
   </nav>
 </header>

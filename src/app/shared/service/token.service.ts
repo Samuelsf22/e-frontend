@@ -2,21 +2,30 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class TokenService {
-  router: Router = inject(Router);
+  private readonly router = inject(Router);
+  private readonly TOKEN_KEY = 'auth-token';
+
+  private get isBrowser(): boolean {
+    return typeof window !== 'undefined';
+  }
 
   setToken(token: string): void {
-    localStorage.setItem('AuthToken', token);
+    if (this.isBrowser) {
+      localStorage.setItem(this.TOKEN_KEY, token);
+    }
   }
 
   getToken(): string | null {
-    return localStorage.getItem('AuthToken');
+    return this.isBrowser ? localStorage.getItem(this.TOKEN_KEY) : null;
   }
 
   logOut(): void {
-    localStorage.removeItem('AuthToken');
-    this.router.navigate(['/']);
+    if (this.isBrowser) {
+      localStorage.removeItem(this.TOKEN_KEY);
+      this.router.navigate(['/']);
+    }
   }
 }
