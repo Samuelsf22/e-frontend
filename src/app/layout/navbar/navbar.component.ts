@@ -7,8 +7,8 @@ import {
   HlmMenuItemDirective,
 } from '@spartan-ng/ui-menu-helm';
 import { SigninComponent } from '@auth/signin/signin.component';
-import { SignupComponent } from '@auth/signup/signup.component';
 import { AuthService } from '@shared/service/auth.service';
+import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
 @Component({
   selector: 'e-navbar',
   imports: [
@@ -17,13 +17,17 @@ import { AuthService } from '@shared/service/auth.service';
     BrnMenuTriggerDirective,
     HlmMenuComponent,
     HlmMenuItemDirective,
-    SigninComponent,
-    SignupComponent,
   ],
   standalone: true,
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
   private authService = inject(AuthService);
+  private readonly _hlmDialogService = inject(HlmDialogService);
+
   isSignedIn: boolean = this.authService.isAuthenticated();
+
+  public openSignInComponent() {
+    this._hlmDialogService.open(SigninComponent);
+  }
 }

@@ -26,10 +26,21 @@
         </hlm-menu>
       </ng-template>
     </div>
-    @if(!isSignedIn){
-    <signin />
-    <signup />
-    }
-    <theme-toggle />
+    <div class="flex items-center">
+      @if(!isSignedIn){
+      <button hlmBtn variant="link" align="end" [brnMenuTriggerFor]="userMenu">
+        Sign In
+      </button>
+      <ng-template #userMenu>
+        <hlm-menu>
+          <button hlmMenuItem (click)="openSignInComponent()">Sign In</button>
+          <a href="/signup">
+            <button hlmMenuItem>Sign Up</button>
+          </a>
+        </hlm-menu>
+      </ng-template>
+      }
+      <theme-toggle />
+    </div>
   </nav>
 </header>
