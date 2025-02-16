@@ -25,7 +25,7 @@ export class TokenService {
   logOut(): void {
     if (this.isBrowser) {
       localStorage.removeItem(this.TOKEN_KEY);
-      this.router.navigate(['/']);
+      window.location.reload();
     }
   }
 }

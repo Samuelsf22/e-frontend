@@ -28,12 +28,21 @@
     </div>
     <div class="flex items-center">
       @if(!isSignedIn){
-      <button hlmBtn variant="link" align="end" [brnMenuTriggerFor]="userMenu">
+      <button
+        hlmBtn
+        variant="link"
+        align="end"
+        [brnMenuTriggerFor]="signInMenu"
+      >
         Sign In
       </button>
-      <ng-template #userMenu>
+      <ng-template #signInMenu>
         <hlm-menu>
-          <button hlmMenuItem class="flex items-center gap-4" (click)="openSignInComponent()">
+          <button
+            hlmMenuItem
+            class="flex items-center gap-4"
+            (click)="openSignInComponent()"
+          >
             <ng-icon name="featherUserCheck" />
             Sign In
           </button>
@@ -43,6 +52,22 @@
               Sign Up
             </button>
           </a>
+        </hlm-menu>
+      </ng-template>
+      }@else {
+      <button hlmBtn variant="link" align="end" [brnMenuTriggerFor]="userMenu">
+        <ng-icon name="featherUser" />
+      </button>
+      <ng-template #userMenu>
+        <hlm-menu>
+          <button
+            hlmMenuItem
+            class="flex items-center gap-4"
+            (click)="signOut()"
+          >
+            <ng-icon name="featherLogOut" />
+            Sign Out
+          </button>
         </hlm-menu>
       </ng-template>
       }

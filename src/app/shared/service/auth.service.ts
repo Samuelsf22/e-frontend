@@ -35,4 +35,8 @@ export class AuthService {
   SignUp = (user: User): Observable<User> => {
     return this.httpClient.post<User>(`${environment.authUrl}/create`, user);
   }
+
+  logout() {
+    this.tokenService.logOut();
+  }
 }

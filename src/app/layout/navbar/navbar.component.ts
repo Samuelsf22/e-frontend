@@ -11,7 +11,12 @@ import { AuthService } from '@shared/service/auth.service';
 import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
 
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { featherUserCheck, featherUserPlus } from '@ng-icons/feather-icons';
+import {
+  featherUserCheck,
+  featherUserPlus,
+  featherUser,
+  featherLogOut,
+} from '@ng-icons/feather-icons';
 @Component({
   selector: 'e-navbar',
   imports: [
@@ -24,7 +29,14 @@ import { featherUserCheck, featherUserPlus } from '@ng-icons/feather-icons';
   ],
   standalone: true,
   templateUrl: './navbar.component.html',
-  viewProviders: [provideIcons({ featherUserCheck, featherUserPlus })],
+  viewProviders: [
+    provideIcons({
+      featherUserCheck,
+      featherUserPlus,
+      featherUser,
+      featherLogOut,
+    }),
+  ],
 })
 export class NavbarComponent {
   private authService = inject(AuthService);
@@ -34,5 +46,9 @@ export class NavbarComponent {
 
   public openSignInComponent() {
     this._hlmDialogService.open(SigninComponent);
+  }
+
+  public signOut() {
+    this.authService.logout();
   }
 }
