@@ -16,6 +16,7 @@ import {
   featherUserPlus,
   featherUser,
   featherLogOut,
+  featherShoppingCart,
 } from '@ng-icons/feather-icons';
 @Component({
   selector: 'e-navbar',
@@ -35,6 +36,7 @@ import {
       featherUserPlus,
       featherUser,
       featherLogOut,
+      featherShoppingCart,
     }),
   ],
 })
