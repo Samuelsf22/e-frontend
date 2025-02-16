@@ -1,0 +1,102 @@
+<div class="max-w-3xl mx-auto h-max">
+  <section class="bg-transparent shadow-none border-none" hlmCard>
+    <div hlmCardHeader>
+      <h3 hlmCardTitle>Sign Up</h3>
+      <p hlmCardDescription>Sign up to access the best deals</p>
+    </div>
+    <div hlmCardContent>
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmitSignUp()"
+        class="flex flex-col gap-4"
+      >
+        <hlm-form-field>
+          <input
+            aria-label="First Name"
+            formControlName="first_name"
+            class="w-full"
+            hlmInput
+            type="text"
+            placeholder="First Name"
+          />
+          <hlm-error>Your first name is required</hlm-error>
+        </hlm-form-field>
+        <hlm-form-field>
+          <input
+            aria-label="Last Name"
+            formControlName="last_name"
+            class="w-full"
+            hlmInput
+            type="text"
+            placeholder="Last Name"
+          />
+          <hlm-error>Your last name is required</hlm-error>
+        </hlm-form-field>
+        <hlm-form-field>
+          <input
+            aria-label="Email address"
+            formControlName="email"
+            class="w-full"
+            hlmInput
+            type="email"
+            placeholder="Email"
+          />
+          <hlm-error>Your email is required</hlm-error>
+        </hlm-form-field>
+        <hlm-form-field>
+          <input
+            aria-label="Username"
+            formControlName="username"
+            class="w-full"
+            hlmInput
+            type="text"
+            placeholder="Username"
+          />
+          <hlm-error>Your username is required</hlm-error>
+        </hlm-form-field>
+        <hlm-form-field>
+          <input
+            aria-label="Password"
+            formControlName="password"
+            class="w-full"
+            hlmInput
+            type="password"
+            placeholder="Password"
+          />
+          <hlm-error>Your password is required</hlm-error>
+        </hlm-form-field>
+        <hlm-form-field>
+          <input
+            aria-label="Address"
+            formControlName="address"
+            class="w-full"
+            hlmInput
+            type="text"
+            placeholder="Address"
+          />
+          <hlm-error>Your address is required</hlm-error>
+        </hlm-form-field>
+        <hlm-form-field>
+          <input
+            aria-label="Image"
+            formControlName="image_url"
+            class="w-full"
+            hlmInput
+            type="file"
+            placeholder="Image"
+          />
+          <hlm-error>Your image is required</hlm-error>
+        </hlm-form-field>
+        <button hlmBtn class="w-full" type="submit">Sign Up</button>
+      </form>
+    </div>
+    <div hlmCardFooter>
+      <p hlmP class="w-full text-center text-sm">
+        Already have an account?
+        <button hlmBtn variant="link" class="p-0" (click)="openSignInComponent()">
+          Sign In
+        </button>
+      </p>
+    </div>
+  </section>
+</div>

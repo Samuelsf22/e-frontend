@@ -1,0 +1,51 @@
+<div class="sm:max-w-[425px] flex flex-col gap-4">
+  <hlm-dialog-header>
+    <h3 hlmDialogTitle>Log In</h3>
+    <p hlmDialogDescription>Enter your credentials to log in</p>
+  </hlm-dialog-header>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmitLogin()"
+    class="sm:w-80 flex flex-col gap-4"
+  >
+    <hlm-form-field>
+      <input
+        aria-label="Email address"
+        formControlName="email"
+        class="w-full"
+        hlmInput
+        type="email"
+        placeholder="Email"
+      />
+      <hlm-error>Your email is required</hlm-error>
+    </hlm-form-field>
+    <hlm-form-field>
+      <input
+        aria-label="Password"
+        formControlName="password"
+        class="w-full"
+        hlmInput
+        type="password"
+        placeholder="Password"
+      />
+      <hlm-error>Your password is required</hlm-error>
+    </hlm-form-field>
+    @if (loginMutation.error()){
+    <p
+      (click)="loginMutation.reset()"
+      class="text-destructive text-center text-sm"
+    >
+      Invalid Credentials
+    </p>
+    }
+    <button hlmBtn class="w-full" type="submit">Log In</button>
+  </form>
+  <hlm-dialog-footer>
+    <p hlmP class="w-full text-center text-sm">
+      Don't have an account?
+      <a href="/signup">
+        <button hlmBtn variant="link" class="p-0">Sign Up</button>
+      </a>
+    </p>
+  </hlm-dialog-footer>
+</div>
