@@ -54,6 +54,9 @@
       ],
       "@spartan-ng/ui-typography-helm": [
         "./libs/ui/ui-typography-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-spinner-helm": [
+        "./libs/ui/ui-spinner-helm/src/index.ts"
       ]
     }
   },
