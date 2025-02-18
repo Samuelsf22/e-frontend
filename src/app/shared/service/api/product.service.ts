@@ -14,9 +14,23 @@ export class ProductService {
     return this.httpClient.get<Product[]>(`${environment.apiUrl}/product`);
   };
 
+  getProductByPublicId = (publicId: string): Observable<Product> => {
+    return this.httpClient.get<Product>(
+      `${environment.apiUrl}/product`, {
+      params: { public_id: publicId },
+    });
+  };
+
   getProductsByCategory = (categoryPublicId: string): Observable<Product[]> => {
     return this.httpClient.get<Product[]>(
-      `${environment.apiUrl}/product/category/${categoryPublicId}`
+      `${environment.apiUrl}/product/category`,
+      { params: { category_id: categoryPublicId } }
+    );
+  };
+
+  getFeaturedProducts = (): Observable<Product[]> => {
+    return this.httpClient.get<Product[]>(
+      `${environment.apiUrl}/product/featured`
     );
   };
 }

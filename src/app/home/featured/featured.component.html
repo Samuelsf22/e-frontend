@@ -1,0 +1,21 @@
+<section hlmCard>
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>Featured</h3>
+    <p hlmCardDescription>Check out our featured products</p>
+  </div>
+  <div hlmCardContent>
+    <div class="flex justify-center items-center">
+      @if(featuredProducts.isPending()){
+      <hlm-spinner />
+      <p hlmP>Loading...</p>
+      }@else if (featuredProducts.error()) {
+      <p hlmP>Error loading featured products</p>
+      }
+    </div>
+    @if (featuredProducts.isSuccess()) {
+    <product-card />
+    @for (product of featuredProducts.data(); track product.public_id) {
+    <p>{{ product.name }}</p>
+    } }
+  </div>
+</section>
