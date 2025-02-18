@@ -13,9 +13,8 @@
       }
     </div>
     @if (featuredProducts.isSuccess()) {
-    <product-card />
-    @for (product of featuredProducts.data(); track product.public_id) {
-    <p>{{ product.name }}</p>
+      @for (product of featuredProducts.data(); track product.public_id) {
+      <product-card [product]="product"/>
     } }
   </div>
 </section>

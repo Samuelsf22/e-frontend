@@ -1,1 +1,16 @@
-<p>card works!</p>
+<a [routerLink]="['product', product().public_id]">
+  <section hlmCard>
+    <div hlmCardHeader>
+      <img
+        [src]="product().picture_url"
+        alt="{{ product().name }}"
+        width="250px"
+      />
+    </div>
+    <div hlmCardContent>
+      <p hlmMuted class="uppercase text-xs">{{ product().brand }}</p>
+      <h3 hlmCardTitle class="uppercase truncate">{{ product().name }}</h3>
+      <p hlmCardDescription class="text-base">{{ product().price | currency }}</p>
+    </div>
+  </section>
+</a>
