@@ -11,19 +11,31 @@
         hlmBtn
         variant="link"
         class="font-semibold"
-        [brnMenuTriggerFor]="menu"
+        [brnMenuTriggerFor]="categoriesMenu"
       >
         Products
       </button>
-      <ng-template #menu>
+      <ng-template #categoriesMenu>
+        @if(categories.isPending()){
+        <hlm-spinner />
+        <p hlmP>Loading...</p>
+
+        }@else if (categories.error()) {
+        <p hlmP>Error: {{ categories.error() }}</p>
+
+        }@else {
         <hlm-menu>
-          <button hlmMenuItem>
-            <span>Product 1</span>
-          </button>
-          <button hlmMenuItem>
-            <span>Product 2</span>
-          </button>
+          @for (category of categories.data(); track category.public_id) {
+            <a
+              [routerLink]="['products/', category.public_id]"
+            >
+              <button hlmMenuItem class="flex items-center gap-4">
+                {{ category.name }}
+              </button>
+            </a>
+          }
         </hlm-menu>
+        }
       </ng-template>
     </div>
     <div class="flex items-center">

@@ -1,59 +1,49 @@
-# EFrontend
+# 🛒 E-Commerce App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+<div align="center">
+<a href="https://e-commerce-a19.vercel.app/">
+<img src="./public/readme.webp" alt="E-Commerce App">
+</a>
+</div>
 
-## Development server
+## 📌 About the Project
 
-To start a local development server, run:
+This is a **modern e-commerce application** built with the latest web technologies, providing a seamless shopping experience with an intuitive UI, powerful search functionality, and secure transactions.
 
-```bash
-ng serve
-```
+## 🛠️ Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+<div align="center">
 
-## Code scaffolding
+![Angular Badge](https://img.shields.io/badge/Angular-DD0031?logo=angular&logoColor=fff&style=flat)
+![Tailwind CSS Badge](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=flat)
+![GitHub stars](https://img.shields.io/github/stars/Samuelsf22/e-frontend)
+![GitHub PRs](https://img.shields.io/github/issues-pr/Samuelsf22/e-frontend)
+![GitHub forks](https://img.shields.io/github/forks/Samuelsf22/e-frontend)
+![GitHub issues](https://img.shields.io/github/issues/Samuelsf22/e-frontend)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+</div>
 
-```bash
-ng generate component component-name
-```
+## 🚀 Features
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+✅ **User Authentication & Authorization** (JWT-based authentication)  
+✅ **Product Management** (Create, Read, Update, Delete)  
+✅ **Category Filtering & Search**  
+✅ **Shopping Cart & Wishlist**  
+✅ **Secure Checkout with Payment Integration**  
+✅ **Admin Dashboard for Inventory & Orders**  
+✅ **Responsive & Mobile-Friendly Design**  
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🏗️ Installation & Setup
 
 ```bash
-ng test
-```
+# Clone the repository
+git https://github.com/Samuelsf22/e-frontend
 
-## Running end-to-end tests
+# Navigate to the project directory
+cd e-frontend
 
-For end-to-end (e2e) testing, run:
+# Install dependencies
+npm install
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# Start the development server
+npm run dev
