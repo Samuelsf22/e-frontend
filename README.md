@@ -37,7 +37,7 @@ This is a **modern e-commerce application** built with the latest web technologi
 
 ```bash
 # Clone the repository
-git https://github.com/Samuelsf22/e-frontend
+git clone https://github.com/Samuelsf22/e-frontend.git
 
 # Navigate to the project directory
 cd e-frontend
