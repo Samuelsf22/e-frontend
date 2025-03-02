@@ -18,8 +18,7 @@
       <ng-template #categoriesMenu>
         @if(categories.isPending()){
         <hlm-spinner />
-        <p hlmP>Loading...</p>
-
+        
         }@else if (categories.error()) {
         <p hlmP>Error: {{ categories.error() }}</p>
 
