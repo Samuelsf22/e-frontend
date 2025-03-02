@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { JwtToken, Login, User } from '@model/user.model';
+import { JwtToken, Login, UserRequest } from '@model/user.model';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
@@ -15,14 +15,11 @@ export class AuthService {
 
   SignIn = (login: Login): Observable<JwtToken> => {
     return this.httpClient
-      .post<JwtToken>(`${environment.authUrl}/login`, login)
+      .post<JwtToken>(`${environment.apiUrl}/auth/login`, login)
       .pipe(
         tap((jwtToken) => {
           if (jwtToken.token) {
             this.tokenService.setToken(jwtToken.token);
-            setTimeout(() => {
-              this.tokenService.logOut();
-            }, 3600 * 1000);
           }
         })
       );
@@ -32,9 +29,16 @@ export class AuthService {
     return !!this.tokenService.getToken();
   }
 
-  SignUp = (user: User): Observable<User> => {
-    return this.httpClient.post<User>(`${environment.authUrl}/create`, user);
-  }
+  SignUp = (user: UserRequest): Observable<JwtToken> => {
+    return this.httpClient.post<JwtToken>(`${environment.apiUrl}/auth/create`, user)
+    .pipe(
+      tap((jwtToken) => {
+        if (jwtToken.token) {
+          this.tokenService.setToken(jwtToken.token);
+        }
+      })
+    );
+  };
 
   logout() {
     this.tokenService.logOut();

@@ -1,5 +1,4 @@
 export interface Category {
-  id: number;
   public_id: string;
   name: string;
 }

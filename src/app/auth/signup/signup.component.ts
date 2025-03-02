@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SigninComponent } from '@auth/signin/signin.component';
-import { User } from '@shared/model/user.model';
+import { UserRequest } from '@shared/model/user.model';
 import { AuthService } from '@shared/service/auth.service';
 import {
   ErrorStateMatcher,
@@ -46,19 +46,18 @@ export class SignupComponent {
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private router: Router = inject(Router);
   private authService: AuthService = inject(AuthService);
+  private readonly _hlmDialogService = inject(HlmDialogService);
 
   form = this._formBuilder.group({
     first_name: ['', [Validators.required, Validators.minLength(2)]],
     last_name: ['', [Validators.required, Validators.minLength(2)]],
-    email: ['', [Validators.required, Validators.email]],
     username: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     address: ['', [Validators.required, Validators.minLength(5)]],
-    image_url: [''],
   });
 
   signUpMutation = injectMutation(() => ({
-    mutationFn: (user: User) => lastValueFrom(this.authService.SignUp(user)),
+    mutationFn: (user: UserRequest) => lastValueFrom(this.authService.SignUp(user)),
     onSuccess: () => {
       this.router.navigate(['/']);
       this.openSignInComponent();
@@ -70,18 +69,14 @@ export class SignupComponent {
       this.signUpMutation.mutate({
         first_name: this.form.value.first_name!,
         last_name: this.form.value.last_name!,
-        email: this.form.value.email!,
         username: this.form.value.username!,
         password: this.form.value.password!,
         address: this.form.value.address!,
-        image_url: this.form.value.image_url || '',
       });
     } else {
       this.form.markAllAsTouched();
     }
   };
-
-  private readonly _hlmDialogService = inject(HlmDialogService);
 
   public openSignInComponent() {
     this._hlmDialogService.open(SigninComponent);
