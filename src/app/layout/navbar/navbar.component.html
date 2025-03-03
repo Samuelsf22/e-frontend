@@ -18,7 +18,7 @@
       <ng-template #categoriesMenu>
         @if(categories.isPending()){
         <hlm-spinner />
-        
+
         }@else if (categories.error()) {
         <p hlmP>Error: {{ categories.error() }}</p>
 
@@ -26,7 +26,7 @@
         <hlm-menu>
           @for (category of categories.data(); track category.public_id) {
             <a
-              [routerLink]="['products/', category.public_id]"
+              [routerLink]="['/category', category.public_id]"
             >
               <button hlmMenuItem class="flex items-center gap-4">
                 {{ category.name }}

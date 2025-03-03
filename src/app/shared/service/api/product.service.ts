@@ -24,7 +24,7 @@ export class ProductService {
   getProductsByCategory = (categoryPublicId: string): Observable<Product[]> => {
     return this.httpClient.get<Product[]>(
       `${environment.apiUrl}/product/category`,
-      { params: { category_id: categoryPublicId } }
+      { params: { category_public_id: categoryPublicId } }
     );
   };
 

@@ -3,6 +3,7 @@ import { HomeComponent } from './home/index/home.component';
 import { SignupComponent } from '@auth/signup/signup.component';
 import { AuthenticatedGuard } from '@shared/guards/authenticated.guard';
 import { ProductDetailsComponent } from '@product/details/details.component';
+import { CategoryComponent } from '@product/category/category.component';
 
 export const routes: Routes = [
   {
@@ -18,5 +19,8 @@ export const routes: Routes = [
     path: 'product/:public_id',
     component: ProductDetailsComponent
   },
-  
+  {
+    path: 'category/:public_id',
+    component: CategoryComponent
+  },
 ];

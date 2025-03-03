@@ -13,4 +13,11 @@ export class CategoryService {
   getCategories = (): Observable<Category[]> => {
     return this.httpClient.get<Category[]>(`${environment.apiUrl}/category`);
   };
+
+  getCategoryByPublicId = (publicId: string): Observable<Category> => {
+    return this.httpClient.get<Category>(`${environment.apiUrl}/category`, {
+      params: { public_id: publicId },
+    });
+  };
+  
 }
