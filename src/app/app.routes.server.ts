@@ -4,5 +4,13 @@ export const serverRoutes: ServerRoute[] = [
   {
     path: '**',
     renderMode: RenderMode.Prerender
+  },
+  {
+    path: 'product/:public_id',
+    renderMode: RenderMode.Server
+  },
+  {
+    path: 'category/:public_id',
+    renderMode: RenderMode.Server
   }
 ];
