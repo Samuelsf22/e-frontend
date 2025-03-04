@@ -3,18 +3,20 @@
   @for (cart of cartQuery.data(); track cart.public_id) {
   <section
     hlmCard
-    class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 py-4 px-2 gap-4"
+    class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 p-4 gap-4"
   >
-    <div class="col-span-1">
+    <div class="col-span-1 flex items-center justify-center">
       <img
-        [src]="cart.picture_url"
-        alt="{{ cart.name }}"
-        width="100px"
-        class="mx-auto block"
+      [src]="cart.picture_url"
+      alt="{{ cart.name }}"
+      width="125px"
+      class="object-contain"
       />
     </div>
     <div class="col-span-2 md:col-span-3 lg:col-span-5">
-      <div class="flex sm:flex-row flex-col items-center justify-between h-full">
+      <div
+        class="flex sm:flex-row flex-col items-center justify-between h-full"
+      >
         <div>
           <h3 hlmCardTitle class="uppercase line-clamp-2">{{ cart.name }}</h3>
           <p>{{ cart.brand }}</p>
@@ -23,13 +25,24 @@
           </p>
         </div>
         <div class="flex gap-4 items-center">
-          <button hlmBtn variant="outline" size="icon">
+          <button
+            hlmBtn
+            variant="outline"
+            size="icon"
+            (click)="removeQuantityToCart(cart)"
+          >
             <ng-icon name="featherMinus" size="16" />
           </button>
           <p>{{ cart.quantity }}</p>
-          <button hlmBtn variant="outline" size="icon">
+          <button
+            hlmBtn
+            variant="outline"
+            size="icon"
+            (click)="addQuantityToCart(cart)"
+          >
             <ng-icon name="featherPlus" size="16" />
           </button>
+          <button hlmBtn variant="destructive" (click)="remove(cart.public_id)">Remove</button>
         </div>
       </div>
     </div>

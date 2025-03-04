@@ -59,6 +59,13 @@ export class ProductService {
     }
   }
 
+  getCartDetails(): Observable<CartItem[]> {
+    return new Observable((observer) => {
+      observer.next(this.getCartFromLocalStorage());
+      observer.complete();
+    });
+  }
+
   addToCart(
     cart: CartItem,
     command: 'add' | 'remove'
@@ -76,6 +83,10 @@ export class ProductService {
             productExist.quantity!++;
           } else if (command === 'remove') {
             productExist.quantity!--;
+            if (productExist.quantity! <= 0) {
+              this.removeFromCart(cart.public_id);
+              return;
+            }
           }
         } else {
           cartFromLocalStorage.push(itemToAdded);

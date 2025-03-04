@@ -13,6 +13,8 @@ import { HlmPDirective } from '@spartan-ng/ui-typography-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { featherMinus, featherPlus } from '@ng-icons/feather-icons';
+import { CartItem } from '@shared/model/product.model';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -33,6 +35,23 @@ export class CartComponent {
 
   cartQuery = injectQuery(() => ({
     queryKey: ['cart'],
-    queryFn: () => this.productService.getCartFromLocalStorage(),
+    queryFn: () => lastValueFrom(this.productService.getCartDetails()),
   }));
+
+  addQuantityToCart(cart: CartItem) {
+    this.productService.addToCart(cart, 'add');
+    this.cartQuery.refetch();
+  }
+
+  removeQuantityToCart(cart: CartItem) {
+    if (cart.quantity! > 0) {
+      this.productService.addToCart(cart, 'remove');
+      this.cartQuery.refetch();
+    }
+  }
+
+  remove(public_id: string) {
+    this.productService.removeFromCart(public_id);
+    this.cartQuery.refetch();
+  }
 }
