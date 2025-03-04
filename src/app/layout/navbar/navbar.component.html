@@ -10,31 +10,33 @@
       <button
         hlmBtn
         variant="link"
-        class="font-semibold"
+        class="font-semibold gap-2"
         [brnMenuTriggerFor]="categoriesMenu"
       >
         Products
+        <ng-icon name="featherChevronDown" />
       </button>
       <ng-template #categoriesMenu>
-        @if(categories.isPending()){
-        <hlm-spinner />
-
-        }@else if (categories.error()) {
-        <p hlmP>Error: {{ categories.error() }}</p>
-
-        }@else {
         <hlm-menu>
-          @for (category of categories.data(); track category.public_id) {
-            <a
-              [routerLink]="['/category', category.public_id]"
-            >
+          @if (categories.isSuccess()){
+            @for (category of categories.data();
+            track category.public_id) {
+            <a [routerLink]="['/category', category.public_id]">
               <button hlmMenuItem class="flex items-center gap-4">
                 {{ category.name }}
               </button>
             </a>
+          }}@else {
+          <div class="flex justify-center items-center text-center">
+            @if(categories.isPending()){
+            <hlm-spinner />
+
+            }@else if (categories.error()) {
+            <p hlmP>Error</p>
+            }
+          </div>
           }
         </hlm-menu>
-        }
       </ng-template>
     </div>
     <div class="flex items-center">
