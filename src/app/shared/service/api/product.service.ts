@@ -34,6 +34,13 @@ export class ProductService {
     );
   };
 
+  getRelatedProducts = (publicId: string): Observable<Product[]> => {
+    return this.httpClient.get<Product[]>(
+      `${environment.apiUrl}/product/related`,
+      { params: { public_id: publicId } }
+    );
+  };
+
   private platformId = inject(PLATFORM_ID);
   private keyCartStorage = 'cart';
   private addedToCart$ = new BehaviorSubject<Array<CartItemAdd>>([]);

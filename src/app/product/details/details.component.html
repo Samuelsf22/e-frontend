@@ -1,6 +1,9 @@
 @if (product.isSuccess()) {
 <section hlmCard class="bg-transparent shadow-none border-none">
-  <div hlmCardContent class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
+  <div
+    hlmCardContent
+    class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4"
+  >
     <div class="col-span-1 md:col-span-2">
       <img
         [src]="product.data().picture_url"
@@ -18,7 +21,9 @@
       <p class="text-destructive">Out of stock</p>
       }
       <div class="pt-4">
-        <p class="text-2xl font-semibold">{{ product.data().price | currency }}</p>
+        <p class="text-2xl font-semibold">
+          {{ product.data().price | currency }}
+        </p>
         <div class="flex items-center">
           <p hlmP>Brand</p>
           <p class="font-semibold ml-2">{{ product.data().brand }}</p>
@@ -48,4 +53,15 @@
     </div>
   </div>
 </section>
+
+<related-products [publicId]="publicId" />
+
+} @else {
+<div class="flex justify-center items-center text-center">
+  @if (product.isPending()) {
+  <hlm-spinner />
+  } @else if (product.error()) {
+  <p hlmP>Error loading product</p>
+  }
+</div>
 }

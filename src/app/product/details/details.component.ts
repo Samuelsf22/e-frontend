@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { featherCheck, featherShoppingCart } from '@ng-icons/feather-icons';
+import { RelatedComponent } from '@product/related/related.component';
 import { Product } from '@shared/model/product.model';
 import { ProductService } from '@shared/service/api/product.service';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -11,6 +12,7 @@ import {
   HlmCardDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
+import { HlmSpinnerModule } from '@spartan-ng/ui-spinner-helm';
 import {
   HlmH4Directive,
   HlmPDirective,
@@ -28,6 +30,8 @@ import { interval, lastValueFrom, take } from 'rxjs';
     HlmCardTitleDirective,
     HlmH4Directive,
     HlmPDirective,
+    HlmSpinnerModule,
+    RelatedComponent,
     NgIcon,
   ],
   templateUrl: './details.component.html',
@@ -37,7 +41,7 @@ export class ProductDetailsComponent {
   private route = inject(ActivatedRoute);
   private productService = inject(ProductService);
 
-  private readonly publicId = this.route.snapshot.params['public_id'];
+  publicId = this.route.snapshot.params['public_id'];
 
   product = injectQuery(() => ({
     queryKey: ['product', this.publicId],
