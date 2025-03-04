@@ -51,9 +51,15 @@ export class ProductDetailsComponent {
 
   labelAddToCart = 'Add to cart';
   iconAddToCart = 'featherShoppingCart';
-
   addToCart(productToAdd: Product) {
-    this.productService.addToCart(productToAdd.public_id, 'add');
+    const cartItem = {
+      public_id: productToAdd.public_id,
+      name: productToAdd.name,
+      brand: productToAdd.brand,
+      price: productToAdd.price,
+      picture_url: productToAdd.picture_url,
+    };
+    this.productService.addToCart(cartItem, 'add');
     this.labelAddToCart = 'Added to cart';
     this.iconAddToCart = 'featherCheck';
 
@@ -63,5 +69,6 @@ export class ProductDetailsComponent {
         this.labelAddToCart = 'Add to cart';
         this.iconAddToCart = 'featherShoppingCart';
       });
+  }
   }
 }

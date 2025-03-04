@@ -59,25 +59,29 @@ export class ProductService {
     }
   }
 
-  addToCart(publicId: string, command: 'add' | 'remove'): void {
+  addToCart(
+    cart: CartItemAdd,
+    command: 'add' | 'remove'
+  ): void {
     if (isPlatformBrowser(this.platformId)) {
-      const itemToAdd: CartItemAdd = { publicId, quantity: 1 };
+      const itemToAdded = { ...cart, quantity: 1 };
+
       const cartFromLocalStorage = this.getCartFromLocalStorage();
       if (cartFromLocalStorage.length !== 0) {
         const productExist = cartFromLocalStorage.find(
-          (item) => item.publicId === publicId
+          (item) => item.public_id === cart.public_id
         );
         if (productExist) {
           if (command === 'add') {
-            productExist.quantity++;
+            productExist.quantity!++;
           } else if (command === 'remove') {
-            productExist.quantity--;
+            productExist.quantity!--;
           }
         } else {
-          cartFromLocalStorage.push(itemToAdd);
+          cartFromLocalStorage.push(itemToAdded);
         }
       } else {
-        cartFromLocalStorage.push(itemToAdd);
+        cartFromLocalStorage.push(itemToAdded);
       }
       localStorage.setItem(
         this.keyCartStorage,
@@ -91,7 +95,7 @@ export class ProductService {
     if (isPlatformBrowser(this.platformId)) {
       const cartFromLocalStorage = this.getCartFromLocalStorage();
       const productExist = cartFromLocalStorage.find(
-        (item) => item.publicId === publicId
+        (item) => item.public_id === publicId
       );
       if (productExist) {
         cartFromLocalStorage.splice(

@@ -16,6 +16,10 @@ export interface Product {
 }
 
 export interface CartItemAdd {
-  publicId: string;
-  quantity: number;
+  public_id: string;
+  name: string;
+  brand: string;
+  price: number;
+  picture_url: string;
+  quantity?: number;
 }
