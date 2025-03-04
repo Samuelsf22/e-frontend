@@ -13,5 +13,9 @@ export interface Product {
   featured: boolean;
   stock: number;
   picture_url: string;
-  category_id: number;
+}
+
+export interface CartItemAdd {
+  publicId: string;
+  quantity: number;
 }

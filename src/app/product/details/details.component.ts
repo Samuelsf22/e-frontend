@@ -1,10 +1,63 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { featherCheck, featherShoppingCart } from '@ng-icons/feather-icons';
+import { Product } from '@shared/model/product.model';
+import { ProductService } from '@shared/service/api/product.service';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import {
+  HlmCardContentDirective,
+  HlmCardDirective,
+  HlmCardTitleDirective,
+} from '@spartan-ng/ui-card-helm';
+import {
+  HlmH4Directive,
+  HlmPDirective,
+} from '@spartan-ng/ui-typography-helm';
+import { injectQuery } from '@tanstack/angular-query-experimental';
+import { interval, lastValueFrom, take } from 'rxjs';
 
 @Component({
   selector: 'product-details',
-  imports: [],
+  imports: [
+    CommonModule,
+    HlmButtonDirective,
+    HlmCardDirective,
+    HlmCardContentDirective,
+    HlmCardTitleDirective,
+    HlmH4Directive,
+    HlmPDirective,
+    NgIcon,
+  ],
   templateUrl: './details.component.html',
+  viewProviders: [provideIcons({ featherShoppingCart, featherCheck })],
 })
 export class ProductDetailsComponent {
+  private route = inject(ActivatedRoute);
+  private productService = inject(ProductService);
 
+  private readonly publicId = this.route.snapshot.params['public_id'];
+
+  product = injectQuery(() => ({
+    queryKey: ['product', this.publicId],
+    queryFn: () =>
+      lastValueFrom(this.productService.getProductByPublicId(this.publicId)),
+  }));
+
+  labelAddToCart = 'Add to cart';
+  iconAddToCart = 'featherShoppingCart';
+
+  addToCart(productToAdd: Product) {
+    this.productService.addToCart(productToAdd.public_id, 'add');
+    this.labelAddToCart = 'Added to cart';
+    this.iconAddToCart = 'featherCheck';
+
+    interval(3000)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.labelAddToCart = 'Add to cart';
+        this.iconAddToCart = 'featherShoppingCart';
+      });
+  }
 }

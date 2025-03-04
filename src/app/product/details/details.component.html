@@ -1,1 +1,52 @@
-<p>details works!</p>
+@if (product.isSuccess()) {
+<section hlmCard class="bg-transparent shadow-none border-none">
+  <div hlmCardContent class="grid grid-cols-5 gap-4">
+    <div class="col-span-2">
+      <img
+        [src]="product.data().picture_url"
+        alt="{{ product.data().name }}"
+        width="350px"
+        class="mx-auto block"
+      />
+    </div>
+    <div class="col-span-3 space-y-2">
+      <h3 hlmCardTitle class="uppercase line-clamp-2">
+        {{ product.data().name }}
+      </h3>
+      @if (product.data().stock! > 0) {
+      <p class="text-green-600">In stock</p>
+      }@else {
+      <p class="text-destructive">Out of stock</p>
+      }
+      <div class="pt-4">
+        <p class="text-2xl font-semibold">{{ product.data().price | currency }}</p>
+        <div class="flex items-center">
+          <p hlmP>Brand</p>
+          <p class="font-semibold ml-2">{{ product.data().brand }}</p>
+        </div>
+        <div class="flex items-center">
+          <p hlmP>Color</p>
+          <div
+            class="size-5 rounded-full ml-2 border border-foreground"
+            [style.background-color]="product.data().color"
+          ></div>
+        </div>
+      </div>
+      <div class="py-4">
+        <h4 hlmH4>Description</h4>
+        <p class="text-balance">{{ product.data().description }}</p>
+      </div>
+      <button
+        hlmBtn
+        variant="outline"
+        class="flex items-center gap-2"
+        [disabled]="product.data().stock <= 0"
+        (click)="addToCart(product.data()!)"
+      >
+        {{ labelAddToCart }}
+        <ng-icon name="{{ iconAddToCart }}" size="20" />
+      </button>
+    </div>
+  </div>
+</section>
+}
