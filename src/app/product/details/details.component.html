@@ -1,15 +1,14 @@
 @if (product.isSuccess()) {
 <section hlmCard class="bg-transparent shadow-none border-none">
-  <div hlmCardContent class="grid grid-cols-5 gap-4">
-    <div class="col-span-2">
+  <div hlmCardContent class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    <div class="col-span-1 md:col-span-2">
       <img
         [src]="product.data().picture_url"
         alt="{{ product.data().name }}"
-        width="350px"
-        class="mx-auto block"
+        class="mx-auto block w-full max-w-[350px]"
       />
     </div>
-    <div class="col-span-3 space-y-2">
+    <div class="col-span-1 md:col-span-2 lg:col-span-3">
       <h3 hlmCardTitle class="uppercase line-clamp-2">
         {{ product.data().name }}
       </h3>
