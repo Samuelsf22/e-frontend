@@ -1,0 +1,48 @@
+@if (cartQuery.isSuccess() && cartQuery.data().length > 0) {
+<div class="space-y-4">
+  @for (cart of cartQuery.data(); track cart.public_id) {
+  <section
+    hlmCard
+    class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 py-4 px-2 gap-4"
+  >
+    <div class="col-span-1">
+      <img
+        [src]="cart.picture_url"
+        alt="{{ cart.name }}"
+        width="100px"
+        class="mx-auto block"
+      />
+    </div>
+    <div class="col-span-2 md:col-span-3 lg:col-span-5">
+      <div class="flex sm:flex-row flex-col items-center justify-between h-full">
+        <div>
+          <h3 hlmCardTitle class="uppercase line-clamp-2">{{ cart.name }}</h3>
+          <p>{{ cart.brand }}</p>
+          <p class="text-xl font-semibold">
+            {{ cart.price | currency }}
+          </p>
+        </div>
+        <div class="flex gap-4 items-center">
+          <button hlmBtn variant="outline" size="icon">
+            <ng-icon name="featherMinus" size="16" />
+          </button>
+          <p>{{ cart.quantity }}</p>
+          <button hlmBtn variant="outline" size="icon">
+            <ng-icon name="featherPlus" size="16" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  }
+</div>
+}@else {
+<div class="flex justify-center items-center text-center">
+  @if (cartQuery.isPending()) {
+  <hlm-spinner />
+
+  }@else if (cartQuery.isSuccess() && cartQuery.data().length === 0) {
+  <p hlmP>Your cart is empty</p>
+  }
+</div>
+}

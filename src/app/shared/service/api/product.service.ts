@@ -2,7 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { environment } from '@environments/environment';
-import { CartItemAdd, Product } from '@shared/model/product.model';
+import { CartItem, Product } from '@shared/model/product.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -43,14 +43,14 @@ export class ProductService {
 
   private platformId = inject(PLATFORM_ID);
   private keyCartStorage = 'cart';
-  private addedToCart$ = new BehaviorSubject<Array<CartItemAdd>>([]);
+  private addedToCart$ = new BehaviorSubject<Array<CartItem>>([]);
   addedToCart = this.addedToCart$.asObservable();
 
-  private getCartFromLocalStorage(): Array<CartItemAdd> {
+  getCartFromLocalStorage(): Array<CartItem> {
     if (isPlatformBrowser(this.platformId)) {
       const cartProducts = localStorage.getItem(this.keyCartStorage);
       if (cartProducts) {
-        return JSON.parse(cartProducts) as CartItemAdd[];
+        return JSON.parse(cartProducts) as CartItem[];
       } else {
         return [];
       }
@@ -60,7 +60,7 @@ export class ProductService {
   }
 
   addToCart(
-    cart: CartItemAdd,
+    cart: CartItem,
     command: 'add' | 'remove'
   ): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -108,6 +108,13 @@ export class ProductService {
         );
         this.addedToCart$.next(cartFromLocalStorage);
       }
+    }
+  }
+
+  clearCart() {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(this.keyCartStorage);
+      this.addedToCart$.next([]);
     }
   }
 }

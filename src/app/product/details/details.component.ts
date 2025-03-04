@@ -70,5 +70,4 @@ export class ProductDetailsComponent {
         this.iconAddToCart = 'featherShoppingCart';
       });
   }
-  }
 }

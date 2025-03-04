@@ -4,6 +4,7 @@ import { SignupComponent } from '@auth/signup/signup.component';
 import { AuthenticatedGuard } from '@shared/guards/authenticated.guard';
 import { ProductDetailsComponent } from '@product/details/details.component';
 import { CategoryComponent } from '@product/category/category.component';
+import { CartComponent } from '@order/cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -23,4 +24,8 @@ export const routes: Routes = [
     path: 'category/:public_id',
     component: CategoryComponent
   },
+  {
+    path: 'orders',
+    component: CartComponent,
+  }
 ];

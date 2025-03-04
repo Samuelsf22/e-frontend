@@ -15,7 +15,7 @@ export interface Product {
   picture_url: string;
 }
 
-export interface CartItemAdd {
+export interface CartItem {
   public_id: string;
   name: string;
   brand: string;
