@@ -13,10 +13,7 @@ import {
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
 import { HlmSpinnerModule } from '@spartan-ng/ui-spinner-helm';
-import {
-  HlmH4Directive,
-  HlmPDirective,
-} from '@spartan-ng/ui-typography-helm';
+import { HlmH4Directive, HlmPDirective } from '@spartan-ng/ui-typography-helm';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 import { interval, lastValueFrom, take } from 'rxjs';
 
@@ -42,12 +39,29 @@ export class ProductDetailsComponent {
   private productService = inject(ProductService);
 
   publicId = this.route.snapshot.params['public_id'];
+  lastPublicId = '';
 
   product = injectQuery(() => ({
     queryKey: ['product', this.publicId],
     queryFn: () =>
       lastValueFrom(this.productService.getProductByPublicId(this.publicId)),
   }));
+
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.publicId = params['public_id'];
+      this.handlePublicIdChange();
+    });
+  }
+
+  private handlePublicIdChange() {
+    if (this.publicId) {
+      if (this.lastPublicId !== this.publicId && this.lastPublicId !== '') {
+        window.location.reload();
+      }
+      this.lastPublicId = this.publicId;
+    }
+  }
 
   labelAddToCart = 'Add to cart';
   iconAddToCart = 'featherShoppingCart';
