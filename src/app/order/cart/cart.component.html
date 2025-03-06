@@ -94,6 +94,7 @@
           hlmBtn
           class="w-full"
           [disabled]="cartQuery.isSuccess() && cartQuery.data()!.length === 0"
+          (click)="checkout()"
         >
           Checkout
         </button>

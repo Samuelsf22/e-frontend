@@ -9,15 +9,26 @@ import {
 } from '@spartan-ng/ui-card-helm';
 import { HlmSeparatorDirective } from '@spartan-ng/ui-separator-helm';
 import { BrnSeparatorComponent } from '@spartan-ng/brain/separator';
-import { injectQuery } from '@tanstack/angular-query-experimental';
+import {
+  injectMutation,
+  injectQuery,
+} from '@tanstack/angular-query-experimental';
 import { ProductService } from '@shared/service/api/product.service';
 import { HlmSpinnerModule } from '@spartan-ng/ui-spinner-helm';
 import { HlmPDirective } from '@spartan-ng/ui-typography-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { featherMinus, featherPlus, featherTrash2 } from '@ng-icons/feather-icons';
+import {
+  featherMinus,
+  featherPlus,
+  featherTrash2,
+} from '@ng-icons/feather-icons';
 import { CartItem } from '@shared/model/product.model';
 import { lastValueFrom } from 'rxjs';
+import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
+import { AuthService } from '@shared/service/auth.service';
+import { SigninComponent } from '@auth/signin/signin.component';
+import { OrderService } from '@shared/service/api/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -40,6 +51,9 @@ import { lastValueFrom } from 'rxjs';
 })
 export class CartComponent {
   private productService = inject(ProductService);
+  private authService = inject(AuthService);
+  private orderService = inject(OrderService);
+  private readonly _hlmDialogService = inject(HlmDialogService);
 
   cartQuery = injectQuery(() => ({
     queryKey: ['cart'],
@@ -64,10 +78,39 @@ export class CartComponent {
   }
 
   computeTotal() {
-    return this.cartQuery.data()?.reduce(
-      (acc: number, item: CartItem) => acc + item.price * item.quantity!,
-      0
-    );
+    return this.cartQuery
+      .data()
+      ?.reduce(
+        (acc: number, item: CartItem) => acc + item.price * item.quantity!,
+        0
+      );
   }
 
+  createOrder = injectMutation(() => ({
+    mutationFn: () => {
+      return lastValueFrom(
+        this.orderService.createOrder({
+          username: this.authService.getUsername(),
+          products: this.cartQuery.data()!.map((item) => ({
+            product_public_id: item.public_id,
+            product_name: item.name,
+            quantity: item.quantity!,
+            price: item.price,
+          })),
+        })
+      );
+    },
+    onSuccess: () => {
+      this.productService.clearCart();
+      this.cartQuery.refetch();
+    },
+  }));
+
+  checkout() {
+    if (this.authService.isAuthenticated()) {
+      this.createOrder.mutate();
+    } else {
+      this._hlmDialogService.open(SigninComponent);
+    }
+  }
 }

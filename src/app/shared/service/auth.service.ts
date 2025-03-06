@@ -29,18 +29,49 @@ export class AuthService {
     return !!this.tokenService.getToken();
   }
 
+  private getTokenPayload(): any {
+    const token = this.tokenService.getToken();
+    if (!token) return null;
+
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+
+  getUsername(): string {
+    const payload = this.getTokenPayload();
+    return payload?.sub || '';
+  }
+
+  getRoles(): string[] {
+    const payload = this.getTokenPayload();
+    return payload?.roles || [];
+  }
+
   SignUp = (user: UserRequest): Observable<JwtToken> => {
-    return this.httpClient.post<JwtToken>(`${environment.apiUrl}/auth/create`, user)
-    .pipe(
-      tap((jwtToken) => {
-        if (jwtToken.token) {
-          this.tokenService.setToken(jwtToken.token);
-        }
-      })
-    );
+    return this.httpClient
+      .post<JwtToken>(`${environment.apiUrl}/auth/create`, user)
+      .pipe(
+        tap((jwtToken) => {
+          if (jwtToken.token) {
+            this.tokenService.setToken(jwtToken.token);
+          }
+        })
+      );
   };
 
   logout() {
     this.tokenService.logOut();
+  }
+
+  getAuthHeaders() {
+    return {
+      headers: {
+        Authorization: `Bearer ${this.tokenService.getToken()}`,
+      },
+    };
   }
 }
