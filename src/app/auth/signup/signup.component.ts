@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SigninComponent } from '@auth/signin/signin.component';
 import { UserRequest } from '@shared/model/user.model';
 import { AuthService } from '@shared/service/auth.service';
 import {
@@ -16,6 +17,7 @@ import {
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
+import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
 import { HlmFormFieldModule } from '@spartan-ng/ui-formfield-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { injectMutation } from '@tanstack/angular-query-experimental';
@@ -44,6 +46,7 @@ export class SignupComponent {
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private router: Router = inject(Router);
   private authService: AuthService = inject(AuthService);
+  private readonly _hlmDialogService = inject(HlmDialogService);
 
   form = this._formBuilder.group({
     first_name: ['', [Validators.required, Validators.minLength(2)]],
@@ -73,5 +76,9 @@ export class SignupComponent {
     } else {
       this.form.markAllAsTouched();
     }
+  };
+
+  openSignInComponent = () => {
+    this._hlmDialogService.open(SigninComponent);
   };
 }
