@@ -65,7 +65,7 @@
         "./libs/ui/ui-separator-helm/src/index.ts"
       ],
       "@spartan-ng/ui-table-helm": [
-        ".\\libs/ui/ui-table-helm/src/index.ts"
+        "./libs/ui/ui-table-helm/src/index.ts"
       ]
     }
   },
