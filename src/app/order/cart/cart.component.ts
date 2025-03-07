@@ -29,6 +29,7 @@ import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
 import { AuthService } from '@shared/service/auth.service';
 import { SigninComponent } from '@auth/signin/signin.component';
 import { OrderService } from '@shared/service/api/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -54,6 +55,7 @@ export class CartComponent {
   private authService = inject(AuthService);
   private orderService = inject(OrderService);
   private readonly _hlmDialogService = inject(HlmDialogService);
+  private router = inject(Router);
 
   cartQuery = injectQuery(() => ({
     queryKey: ['cart'],
@@ -105,10 +107,10 @@ export class CartComponent {
       this.cartQuery.refetch();
     },
   }));
-
   checkout() {
     if (this.authService.isAuthenticated()) {
       this.createOrder.mutate();
+      this.router.navigate(['/orders/user']);
     } else {
       this._hlmDialogService.open(SigninComponent);
     }
