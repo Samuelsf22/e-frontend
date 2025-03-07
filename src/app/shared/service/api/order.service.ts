@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
-import { Order, OrderRequest } from '@shared/model/order.model';
+import { Order, OrderDetails, OrderRequest } from '@shared/model/order.model';
 import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
 
@@ -26,14 +26,14 @@ export class OrderService {
     });
   };
 
-  getOrderDetails = (orderPublicId: string) => {
-    return this.httpClient.get(`${environment.apiUrl}/order`, {
+  getOrderDetails = (orderPublicId: string): Observable<OrderDetails[]> => {
+    return this.httpClient.get<OrderDetails[]>(`${environment.apiUrl}/order/details`, {
       ...this.authService.getAuthHeaders(),
       params: { order_public_id: orderPublicId },
     });
   };
 
-  getOrderByUser = (username: string) : Observable<Order[]> => {
+  getOrderByUser = (username: string): Observable<Order[]> => {
     return this.httpClient.get<Order[]>(`${environment.apiUrl}/order/user`, {
       ...this.authService.getAuthHeaders(),
       params: { username },

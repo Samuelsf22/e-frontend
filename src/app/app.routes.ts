@@ -39,5 +39,6 @@ export const routes: Routes = [
   {
     path:'orders/:public_id',
     component: OrderDetailComponent,
+    canActivate: [AuthGuard],
   }
 ];

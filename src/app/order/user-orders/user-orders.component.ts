@@ -3,9 +3,14 @@ import { RouterLink } from '@angular/router';
 import { OrderService } from '@shared/service/api/order.service';
 import { AuthService } from '@shared/service/auth.service';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmCardContentDirective, HlmCardDescriptionDirective, HlmCardDirective, HlmCardHeaderDirective, HlmCardTitleDirective } from '@spartan-ng/ui-card-helm';
 import {
-  HlmCaptionComponent,
+  HlmCardContentDirective,
+  HlmCardDescriptionDirective,
+  HlmCardDirective,
+  HlmCardHeaderDirective,
+  HlmCardTitleDirective,
+} from '@spartan-ng/ui-card-helm';
+import {
   HlmTableComponent,
   HlmTdComponent,
   HlmThComponent,
@@ -42,5 +47,4 @@ export class UserOrdersComponent {
       queryFn: () => lastValueFrom(this.orderService.getOrderByUser(username)),
     };
   });
-
 }

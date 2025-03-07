@@ -3,7 +3,6 @@ export interface OrderDetails {
   price: number;
   quantity: number;
   product_name: string;
-  total_amount: number;
 }
 
 export interface Order {
