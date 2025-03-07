@@ -18,14 +18,13 @@
       </button>
       <ng-template #categoriesMenu>
         <hlm-menu>
-          @if (categories.isSuccess()){
-            @for (category of categories.data();
-            track category.public_id) {
-            <a [routerLink]="['/category', category.public_id]">
-              <button hlmMenuItem class="flex items-center gap-4">
-                {{ category.name }}
-              </button>
-            </a>
+          @if (categories.isSuccess()){ @for (category of categories.data();
+          track category.public_id) {
+          <a [routerLink]="['/category', category.public_id]">
+            <button hlmMenuItem class="flex items-center gap-4">
+              {{ category.name }}
+            </button>
+          </a>
           }}@else {
           <div class="flex justify-center items-center text-center">
             @if(categories.isPending()){
@@ -73,6 +72,12 @@
       </button>
       <ng-template #userMenu>
         <hlm-menu>
+          <a [routerLink]="['/orders/user']">
+            <button hlmMenuItem class="flex items-center gap-4">
+              <ng-icon name="featherShoppingBag" />
+              Orders
+            </button>
+          </a>
           <button
             hlmMenuItem
             class="flex items-center gap-4"
@@ -84,7 +89,7 @@
         </hlm-menu>
       </ng-template>
       }
-      <a href="/orders">
+      <a [routerLink]="['/orders']">
         <button hlmBtn variant="link" align="end">
           <ng-icon name="featherShoppingCart" />
         </button>

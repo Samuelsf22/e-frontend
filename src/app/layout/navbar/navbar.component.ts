@@ -19,6 +19,7 @@ import {
   featherLogOut,
   featherShoppingCart,
   featherChevronDown,
+  featherShoppingBag,
 } from '@ng-icons/feather-icons';
 
 import { AuthService } from '@service/auth.service';
@@ -50,6 +51,7 @@ import { lastValueFrom } from 'rxjs';
       featherLogOut,
       featherShoppingCart,
       featherChevronDown,
+      featherShoppingBag,
     }),
   ],
 })

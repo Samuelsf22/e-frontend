@@ -1,0 +1,36 @@
+<section hlmCard>
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>Orders</h3>
+    <p hlmCardDescription>Here you can see all your orders</p>
+  </div>
+  <div hlmCardContent>
+    <hlm-table class="overflow-x-auto">
+      <hlm-trow class="uppercase font-semibold">
+        <hlm-th class="w-1/2 sm:w-4/6">ID</hlm-th>
+        <hlm-th class="md:w-1/6 text-center">Status</hlm-th>
+        <hlm-th class="md:w-1/6 text-center">Actions</hlm-th>
+      </hlm-trow>
+      @for (order of ordersUser.data(); track order.public_id) {
+      <hlm-trow>
+        <hlm-td class="w-1/2 sm:w-4/6">
+          <span class="uppercase line-clamp-1">{{ order.public_id }}</span>
+        </hlm-td>
+        <hlm-td class="md:w-1/6 text-center font-semibold">
+          @if (order.status === 'PAID') {
+          <span class="text-green-600">{{ order.status }}</span>
+          } @else if (order.status === 'PENDING') {
+          <span class="text-yellow-600">{{ order.status }}</span>
+          }
+        </hlm-td>
+        <hlm-td class="md:w-1/6 text-center">
+          @if (order.status === 'PENDING') {
+          <a [routerLink]="['/orders', order.public_id]">
+            <button hlmBtn>Pay</button>
+          </a>
+          }
+        </hlm-td>
+      </hlm-trow>
+      }
+    </hlm-table>
+  </div>
+</section>

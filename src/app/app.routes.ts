@@ -5,6 +5,9 @@ import { AuthenticatedGuard } from '@shared/guards/authenticated.guard';
 import { ProductDetailsComponent } from '@product/details/details.component';
 import { CategoryComponent } from '@product/category/category.component';
 import { CartComponent } from '@order/cart/cart.component';
+import { UserOrdersComponent } from '@order/user-orders/user-orders.component';
+import { AuthGuard } from '@shared/guards/auth.guard';
+import { OrderDetailComponent } from '@order/details/details.component';
 
 export const routes: Routes = [
   {
@@ -27,5 +30,14 @@ export const routes: Routes = [
   {
     path: 'orders',
     component: CartComponent,
+  },
+  {
+    path: 'orders/user',
+    component: UserOrdersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path:'orders/:public_id',
+    component: OrderDetailComponent,
   }
 ];
