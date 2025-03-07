@@ -105,12 +105,12 @@ export class CartComponent {
     onSuccess: () => {
       this.productService.clearCart();
       this.cartQuery.refetch();
+      this.router.navigate(['/orders/user']);
     },
   }));
   checkout() {
     if (this.authService.isAuthenticated()) {
-      this.createOrder.mutate();
-      this.router.navigate(['/orders/user']);
+      this.createOrder.mutate();        
     } else {
       this._hlmDialogService.open(SigninComponent);
     }

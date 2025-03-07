@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { featherCreditCard, featherEye } from '@ng-icons/feather-icons';
 import { OrderService } from '@shared/service/api/order.service';
 import { AuthService } from '@shared/service/auth.service';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -33,8 +35,10 @@ import { lastValueFrom } from 'rxjs';
     HlmCardTitleDirective,
     HlmCardDescriptionDirective,
     HlmCardContentDirective,
+    NgIcon,
   ],
   templateUrl: './user-orders.component.html',
+  providers: provideIcons({ featherEye, featherCreditCard }),
 })
 export class UserOrdersComponent {
   private orderService = inject(OrderService);

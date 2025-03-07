@@ -37,7 +37,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path:'orders/:public_id',
+    path: 'orders/:public_id',
+    component: OrderDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'orders/:public_id/:is_paid',
     component: OrderDetailComponent,
     canActivate: [AuthGuard],
   }
