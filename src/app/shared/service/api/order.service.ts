@@ -27,10 +27,13 @@ export class OrderService {
   };
 
   getOrderDetails = (orderPublicId: string): Observable<OrderDetails[]> => {
-    return this.httpClient.get<OrderDetails[]>(`${environment.apiUrl}/order/details`, {
-      ...this.authService.getAuthHeaders(),
-      params: { order_public_id: orderPublicId },
-    });
+    return this.httpClient.get<OrderDetails[]>(
+      `${environment.apiUrl}/order/details`,
+      {
+        ...this.authService.getAuthHeaders(),
+        params: { order_public_id: orderPublicId },
+      }
+    );
   };
 
   getOrderByUser = (username: string): Observable<Order[]> => {
@@ -42,8 +45,8 @@ export class OrderService {
 
   markOrderAsPaid = (orderPublicId: string) => {
     return this.httpClient.put(
-      `${environment.apiUrl}/order/payment`,
-      { order_public_id: orderPublicId },
+      `${environment.apiUrl}/order/payment?order_public_id=${orderPublicId}`,
+      {},
       this.authService.getAuthHeaders()
     );
   };

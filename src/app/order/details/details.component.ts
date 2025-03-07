@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '@shared/service/api/order.service';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmCardContentDirective,
   HlmCardDescriptionDirective,
   HlmCardDirective,
+  HlmCardFooterDirective,
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
@@ -15,7 +17,10 @@ import {
   HlmThComponent,
   HlmTrowComponent,
 } from '@spartan-ng/ui-table-helm';
-import { injectQuery } from '@tanstack/angular-query-experimental';
+import {
+  injectMutation,
+  injectQuery,
+} from '@tanstack/angular-query-experimental';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -31,14 +36,18 @@ import { lastValueFrom } from 'rxjs';
     HlmCardTitleDirective,
     HlmCardDescriptionDirective,
     HlmCardContentDirective,
+    HlmCardFooterDirective,
+    HlmButtonDirective,
   ],
   templateUrl: './details.component.html',
 })
 export class OrderDetailComponent {
   private route = inject(ActivatedRoute);
   private orderService = inject(OrderService);
+  private router = inject(Router);
 
   publicId = this.route.snapshot.params['public_id'];
+  isPaid: boolean = this.route.snapshot.params['is_paid'];
 
   orderDetails = injectQuery(() => ({
     queryKey: ['order', this.publicId],
@@ -50,5 +59,17 @@ export class OrderDetailComponent {
     return this.orderDetails
       .data()
       ?.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  }
+
+  payOrder = injectMutation(() => ({
+    mutationFn: () =>
+      lastValueFrom(this.orderService.markOrderAsPaid(this.publicId)),
+    onSuccess: () => {
+      this.router.navigate(['/orders', this.publicId]);
+    },
+  }));
+
+  markOrderAsPaid() {
+    this.payOrder.mutate();
   }
 }

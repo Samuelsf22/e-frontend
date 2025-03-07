@@ -44,4 +44,9 @@
       </hlm-trow>
     </hlm-table>
   </div>
+  @if (isPaid) {
+  <div hlmCardFooter class="justify-end">
+    <button hlmBtn class="w-20 md:w-56 lg:w-80" (click)="markOrderAsPaid()">Pay</button>
+  </div>
+  }
 </section>
