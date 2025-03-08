@@ -10,6 +10,7 @@ import { AuthGuard } from '@shared/guards/auth.guard';
 import { OrderDetailComponent } from '@order/details/details.component';
 import { RoleAdminCheckGuard } from '@shared/guards/role-admin-check.guard';
 import { AdminCategoryComponent } from '@admin/category/category.component';
+import { AdminProductComponent } from '@admin/product/product.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,11 @@ export const routes: Routes = [
   {
     path: 'admin/category',
     component: AdminCategoryComponent,
+    canActivate: [AuthGuard, RoleAdminCheckGuard],
+  },
+  {
+    path: 'admin/product',
+    component: AdminProductComponent,
     canActivate: [AuthGuard, RoleAdminCheckGuard],
   },
 ];

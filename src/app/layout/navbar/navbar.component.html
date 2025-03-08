@@ -23,7 +23,7 @@
           @if (categories.isSuccess()){ @for (category of categories.data();
           track category.public_id) {
           <a [routerLink]="['/category', category.public_id]">
-            <button hlmMenuItem class="flex items-center gap-4">
+            <button hlmMenuItem>
               {{ category.name }}
             </button>
           </a>
@@ -52,9 +52,10 @@
       <ng-template #adminMenu>
         <hlm-menu>
           <a [routerLink]="['/admin/category']">
-            <button hlmMenuItem class="flex items-center gap-4">
-              Categories
-            </button>
+            <button hlmMenuItem>Categories</button>
+          </a>
+          <a [routerLink]="['/admin/product']">
+            <button hlmMenuItem>Products</button>
           </a>
         </hlm-menu>
       </ng-template>
