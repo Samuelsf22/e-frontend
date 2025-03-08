@@ -3,6 +3,10 @@ export interface Category {
   name: string;
 }
 
+export interface CreateCategory{
+
+}
+
 export interface Product {
   public_id: string;
   name: string;

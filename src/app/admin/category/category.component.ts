@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { featherMoreVertical } from '@ng-icons/feather-icons';
+import { featherTrash2 } from '@ng-icons/feather-icons';
 import { CategoryService } from '@shared/service/api/category.service';
-import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmCardContentDirective,
@@ -11,18 +10,19 @@ import {
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
-import {
-  HlmMenuComponent,
-  HlmMenuItemDirective,
-} from '@spartan-ng/ui-menu-helm';
+import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
 import {
   HlmTableComponent,
   HlmTdComponent,
   HlmThComponent,
   HlmTrowComponent,
 } from '@spartan-ng/ui-table-helm';
-import { injectQuery } from '@tanstack/angular-query-experimental';
+import {
+  injectMutation,
+  injectQuery,
+} from '@tanstack/angular-query-experimental';
 import { lastValueFrom } from 'rxjs';
+import { CategoryCreateComponent } from './create/create.component';
 
 @Component({
   selector: 'admin-category',
@@ -37,20 +37,34 @@ import { lastValueFrom } from 'rxjs';
     HlmCardDescriptionDirective,
     HlmCardContentDirective,
     HlmCardDirective,
-    BrnMenuTriggerDirective,
-    HlmMenuComponent,
-    HlmMenuItemDirective,
     HlmButtonDirective,
     NgIcon,
   ],
   templateUrl: './category.component.html',
-  providers: provideIcons({ featherMoreVertical }),
+  providers: provideIcons({ featherTrash2 }),
 })
 export class AdminCategoryComponent {
   private categoryService = inject(CategoryService);
+  private readonly _hlmDialogService = inject(HlmDialogService);
 
   categories = injectQuery(() => ({
     queryKey: ['categories'],
     queryFn: () => lastValueFrom(this.categoryService.getCategories()),
   }));
+
+  openCategoryCreate = () => {
+    this._hlmDialogService.open(CategoryCreateComponent);
+  };
+
+  delete = injectMutation(() => ({
+    mutationFn: (public_id: string) =>
+      lastValueFrom(this.categoryService.delete(public_id)),
+    onSuccess: () => {
+      this.categories.refetch();
+    },
+  }));
+
+  onDelete = (public_id: string) => {
+    this.delete.mutate(public_id);
+  };
 }
