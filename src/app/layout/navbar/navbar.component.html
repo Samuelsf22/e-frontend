@@ -51,7 +51,11 @@
       </button>
       <ng-template #adminMenu>
         <hlm-menu>
-
+          <a [routerLink]="['/admin/category']">
+            <button hlmMenuItem class="flex items-center gap-4">
+              Categories
+            </button>
+          </a>
         </hlm-menu>
       </ng-template>
       }

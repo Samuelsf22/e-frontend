@@ -8,8 +8,8 @@ import { CartComponent } from '@order/cart/cart.component';
 import { UserOrdersComponent } from '@order/user-orders/user-orders.component';
 import { AuthGuard } from '@shared/guards/auth.guard';
 import { OrderDetailComponent } from '@order/details/details.component';
-import { CreateCategoryComponent } from '@admin/create-category/create-category.component';
 import { RoleAdminCheckGuard } from '@shared/guards/role-admin-check.guard';
+import { AdminCategoryComponent } from '@admin/category/category.component';
 
 export const routes: Routes = [
   {
@@ -49,8 +49,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'admin/create/category',
-    component: CreateCategoryComponent,
+    path: 'admin/category',
+    component: AdminCategoryComponent,
     canActivate: [AuthGuard, RoleAdminCheckGuard],
   },
 ];

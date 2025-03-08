@@ -1,0 +1,42 @@
+<section hlmCard>
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>Categories</h3>
+    <p hlmCardDescription>Here you can see all your categories</p>
+  </div>
+  <div hlmCardContent>
+    <hlm-table class="overflow-x-auto">
+      <hlm-trow class="uppercase font-semibold">
+        <hlm-th class="w-36 sm:w-96">ID</hlm-th>
+        <hlm-th class="w-24 sm:flex-1">Name</hlm-th>
+        <hlm-th class="w-24 sm:flex-1 justify-center">Actions</hlm-th>
+      </hlm-trow>
+      @for (category of categories.data(); track category.public_id) {
+      <hlm-trow>
+        <hlm-td class="w-36 sm:w-96">
+          <span class="uppercase line-clamp-1">{{ category.public_id }}</span>
+        </hlm-td>
+        <hlm-td class="w-24 sm:flex-1">
+          <span class="line-clamp-1">{{ category.name }}</span>
+        </hlm-td>
+        <hlm-td class="w-24 sm:flex-1 justify-center">
+          <button
+            hlmBtn
+            variant="ghost"
+            size="icon"
+            class="rounded-full"
+            [brnMenuTriggerFor]="actionsCategory"
+          >
+            <ng-icon name="featherMoreVertical" />
+          </button>
+          <ng-template #actionsCategory>
+            <hlm-menu>
+              <button hlmMenuItem>Update</button>
+              <button hlmMenuItem>Delete</button>
+            </hlm-menu>
+          </ng-template>
+        </hlm-td>
+      </hlm-trow>
+      }
+    </hlm-table>
+  </div>
+</section>
