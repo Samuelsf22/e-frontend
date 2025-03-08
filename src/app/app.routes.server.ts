@@ -18,7 +18,7 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Server,
   },
   {
-    path: 'order/:public_id/:is_paid',
+    path: 'orders/:public_id/:is_paid',
     renderMode: RenderMode.Server,
   }
 ];

@@ -74,4 +74,6 @@ export class NavbarComponent {
     queryKey: ['categories'],
     queryFn: () => lastValueFrom(this.categoryService.getCategories()),
   }));
+
+  protected readonly isAdmin: boolean = this.authService.getIsAdmin();
 }

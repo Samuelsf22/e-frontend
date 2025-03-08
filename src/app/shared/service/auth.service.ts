@@ -48,7 +48,11 @@ export class AuthService {
 
   getRoles(): string[] {
     const payload = this.getTokenPayload();
-    return payload?.roles || [];
+    return payload?.roles?.map((role: any) => role.authority) || [];
+  }
+
+  getIsAdmin(): boolean {
+    return this.getRoles().includes('ADMIN');
   }
 
   SignUp = (user: UserRequest): Observable<JwtToken> => {
