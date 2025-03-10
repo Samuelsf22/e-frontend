@@ -2,7 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { environment } from '@environments/environment';
-import { CartItem, Product } from '@shared/model/product.model';
+import { CartItem, CreateProduct, Product } from '@shared/model/product.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 
@@ -43,12 +43,20 @@ export class ProductService {
     );
   };
 
+  createProduct = (product: CreateProduct): Observable<Product> => {
+    return this.httpClient.post<Product>(
+      `${environment.apiUrl}/product`,
+      product,
+      this.authService.getAuthHeaders(),
+    );
+  };
+
   deleteProduct = (publicId: string): Observable<void> => {
     return this.httpClient.delete<void>(`${environment.apiUrl}/product`, {
       params: { public_id: publicId },
       ...this.authService.getAuthHeaders(),
     });
-  }
+  };
 
   private platformId = inject(PLATFORM_ID);
   private keyCartStorage = 'cart';
@@ -75,10 +83,7 @@ export class ProductService {
     });
   }
 
-  addToCart(
-    cart: CartItem,
-    command: 'add' | 'remove'
-  ): void {
+  addToCart(cart: CartItem, command: 'add' | 'remove'): void {
     if (isPlatformBrowser(this.platformId)) {
       const itemToAdded = { ...cart, quantity: 1 };
 

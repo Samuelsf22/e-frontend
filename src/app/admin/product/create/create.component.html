@@ -1,1 +1,114 @@
-<p>create works!</p>
+<div class="sm:max-w-[425px] flex flex-col gap-4">
+  <hlm-dialog-header>
+    <h3 hlmDialogTitle>Create Product</h3>
+    <p hlmDialogDescription>Create a new product by filling the form below</p>
+  </hlm-dialog-header>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="sm:w-80 flex flex-col gap-4"
+  >
+    <hlm-form-field>
+      <input
+        aria-label="Name"
+        formControlName="name"
+        class="w-full"
+        hlmInput
+        type="text"
+        placeholder="Name"
+      />
+      <hlm-error> Name is required </hlm-error>
+    </hlm-form-field>
+    <hlm-form-field>
+      <textarea
+        aria-label="Description"
+        formControlName="description"
+        class="w-full"
+        hlmInput
+        placeholder="Description"
+      ></textarea>
+      <hlm-error> Description is required </hlm-error>
+    </hlm-form-field>
+    <hlm-form-field>
+      <input
+        aria-label="Brand"
+        formControlName="brand"
+        class="w-full"
+        hlmInput
+        type="text"
+        placeholder="Brand"
+      />
+      <hlm-error> Brand is required </hlm-error>
+    </hlm-form-field>
+    <hlm-form-field>
+      <input
+        aria-label="Color"
+        formControlName="color"
+        class="w-full"
+        hlmInput
+        type="color"
+        placeholder="Color"
+      />
+      <hlm-error> Color is required </hlm-error>
+    </hlm-form-field>
+    <hlm-form-field>
+      <input
+        aria-label="Price"
+        formControlName="price"
+        class="w-full"
+        hlmInput
+        type="number"
+        placeholder="Price"
+      />
+      <hlm-error> Price is required </hlm-error>
+    </hlm-form-field>
+    <hlm-form-field>
+      <input
+        aria-label="Stock"
+        formControlName="stock"
+        class="w-full"
+        hlmInput
+        type="number"
+        placeholder="Stock"
+      />
+      <hlm-error> Stock is required </hlm-error>
+    </hlm-form-field>
+    <hlm-form-field>
+      <input
+        aria-label="Picture"
+        formControlName="picture_url"
+        class="w-full"
+        hlmInput
+        type="file"
+        placeholder="Picture"
+      />
+      <hlm-error> Picture is required </hlm-error>
+    </hlm-form-field>
+    <hlm-form-field>
+      <brn-select
+        formControlName="category_public_id"
+        class="inline-block w-full"
+        placeholder="Select an category"
+      >
+        <hlm-select-trigger class="w-full">
+          <hlm-select-value />
+        </hlm-select-trigger>
+        <hlm-select-content>
+          @for (category of categories.data(); track category.public_id) {
+          <hlm-option value="{{ category.public_id }}">
+            {{ category.name }}
+          </hlm-option>
+          }
+        </hlm-select-content>
+      </brn-select>
+      <hlm-error> Category is required </hlm-error>
+    </hlm-form-field>
+
+    @if (create.error()){
+    <p (click)="create.reset()" class="text-destructive text-center text-sm">
+      Error server, try again
+    </p>
+    }
+    <button hlmBtn class="w-full" type="submit">Create</button>
+  </form>
+</div>

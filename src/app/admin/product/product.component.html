@@ -4,8 +4,8 @@
     class="flex flex-col sm:flex-row justify-between items-center"
   >
     <div class="w-full">
-      <h3 hlmCardTitle>Categories</h3>
-      <p hlmCardDescription>Here you can see all your categories</p>
+      <h3 hlmCardTitle>Products</h3>
+      <p hlmCardDescription>Here you can see all your products</p>
     </div>
     <button hlmBtn class="sm:w-80 w-full" (click)="openCategoryCreate()">
       Create
@@ -16,10 +16,10 @@
       <hlm-trow class="uppercase font-semibold">
         <hlm-th class="w-36 sm:w-96">ID</hlm-th>
         <hlm-th class="w-36 sm:w-96">Name</hlm-th>
-        <hlm-th class="w-24 sm:flex-1">Brand</hlm-th>
-        <hlm-th class="w-24 sm:flex-1 justify-end">Price</hlm-th>
-        <hlm-th class="w-24 sm:flex-1 justify-end">Stock</hlm-th>
-        <hlm-th class="w-24 sm:flex-1 justify-center">Actions</hlm-th>
+        <hlm-th class="w-24 xl:flex-1">Brand</hlm-th>
+        <hlm-th class="w-24 xl:flex-1 justify-end">Price</hlm-th>
+        <hlm-th class="w-24 xl:flex-1 justify-end">Stock</hlm-th>
+        <hlm-th class="w-24 xl:flex-1 justify-center">Actions</hlm-th>
       </hlm-trow>
       @for (product of products.data(); track product.public_id) {
       <hlm-trow>
@@ -29,16 +29,16 @@
         <hlm-td class="w-36 sm:w-96">
           <span class="uppercase line-clamp-1">{{ product.name }}</span>
         </hlm-td>
-        <hlm-td class="w-24 sm:flex-1">
+        <hlm-td class="w-24 xl:flex-1">
           <span class="uppercase line-clamp-1">{{ product.brand }}</span>
         </hlm-td>
-        <hlm-td class="w-24 sm:flex-1 justify-end">
+        <hlm-td class="w-24 xl:flex-1 justify-end">
           {{ product.price | currency }}
         </hlm-td>
-        <hlm-td class="w-24 sm:flex-1 justify-end">
+        <hlm-td class="w-24 xl:flex-1 justify-end">
           {{ product.stock }}
         </hlm-td>
-        <hlm-td class="w-24 sm:flex-1 justify-center">
+        <hlm-td class="w-24 xl:flex-1 justify-center">
           <button
             hlmBtn
             variant="destructive"
