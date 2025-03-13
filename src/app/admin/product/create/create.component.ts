@@ -61,32 +61,42 @@ export class ProductCreateComponent {
     price: ['', [Validators.required, Validators.min(1)]],
     featured: [true],
     stock: ['', [Validators.required, Validators.min(1)]],
-    picture_url: ['', [Validators.required]],
+    image: [null, [Validators.required]],
     category_public_id: ['', [Validators.required]],
   });
 
   create = injectMutation(() => ({
-    mutationFn: (product: CreateProduct) =>
-      lastValueFrom(this.productService.createProduct(product)),
+    mutationFn: (data: { product: CreateProduct, image: File }) =>
+      lastValueFrom(this.productService.createProduct(data.product, data.image)),
     onSuccess: () => {
       this.queryClient.invalidateQueries({ queryKey: ['products'] });
       this._dialogRef.close();
     },
   }));
 
+  selectedFile!: File | null;
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
   onSubmit = () => {
-    console.log(this.form.value);
     if (this.form.valid) {
       this.create.mutate({
-        name: this.form.value.name!,
-        description: this.form.value.description!,
-        brand: this.form.value.brand!,
-        color: this.form.value.color!,
-        price: Number(this.form.value.price!),
-        featured: this.form.value.featured!,
-        stock: Number(this.form.value.stock!),
-        picture_url: this.form.value.picture_url!,
-        category_public_id: this.form.value.category_public_id!,
+        product: {
+          name: this.form.value.name!,
+          description: this.form.value.description!,
+          brand: this.form.value.brand!,
+          color: this.form.value.color!,
+          price: Number(this.form.value.price!),
+          featured: this.form.value.featured!,
+          stock: Number(this.form.value.stock!),
+          category_public_id: this.form.value.category_public_id!,
+        },
+        image: this.selectedFile!,
       });
     } else {
       this.form.markAllAsTouched();

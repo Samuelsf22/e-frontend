@@ -12,7 +12,7 @@ export interface Product {
   price: number;
   featured: boolean;
   stock: number;
-  picture_url: string;
+  image_url: string;
 }
 
 export interface CreateProduct {
@@ -23,7 +23,6 @@ export interface CreateProduct {
   price: number;
   featured: boolean;
   stock: number;
-  picture_url: string;
   category_public_id: string;
 }
 
@@ -32,6 +31,6 @@ export interface CartItem {
   name: string;
   brand: string;
   price: number;
-  picture_url: string;
+  image_url: string;
   quantity?: number;
 }

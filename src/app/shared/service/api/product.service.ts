@@ -43,11 +43,20 @@ export class ProductService {
     );
   };
 
-  createProduct = (product: CreateProduct): Observable<Product> => {
+  createProduct = (
+    product: CreateProduct,
+    image: File
+  ): Observable<Product> => {
+    const formData = new FormData();
+
+    formData.append('image', image);
+    formData.append('product', JSON.stringify(product));
+
     return this.httpClient.post<Product>(
       `${environment.apiUrl}/product`,
-      product,
-      this.authService.getAuthHeaders(),
+      formData,
+
+      this.authService.getAuthHeaders()
     );
   };
 

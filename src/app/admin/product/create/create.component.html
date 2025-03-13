@@ -75,14 +75,15 @@
     </hlm-form-field>
     <hlm-form-field>
       <input
-        aria-label="Picture"
-        formControlName="picture_url"
+        aria-label="Image"
+        formControlName="image"
         class="w-full"
         hlmInput
         type="file"
-        placeholder="Picture"
+        placeholder="Image"
+        (change)="onFileSelected($event)"
       />
-      <hlm-error> Picture is required </hlm-error>
+      <hlm-error> Image is required </hlm-error>
     </hlm-form-field>
     <hlm-form-field>
       <brn-select

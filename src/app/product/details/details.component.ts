@@ -71,7 +71,7 @@ export class ProductDetailsComponent {
       name: productToAdd.name,
       brand: productToAdd.brand,
       price: productToAdd.price,
-      picture_url: productToAdd.picture_url,
+      image_url: productToAdd.image_url,
     };
     this.productService.addToCart(cartItem, 'add');
     this.labelAddToCart = 'Added to cart';
