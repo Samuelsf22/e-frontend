@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { environment } from '@environments/environment';
 import { CartItem, CreateProduct, Product } from '@shared/model/product.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { MOCK_PRODUCTS } from '../mock-product';
 
 @Injectable({
   providedIn: 'root',
@@ -31,9 +32,10 @@ export class ProductService {
   };
 
   getFeaturedProducts = (): Observable<Product[]> => {
-    return this.httpClient.get<Product[]>(
-      `${environment.apiUrl}/product/featured`
-    );
+    return this.httpClient
+      .get<Product[]>(`${environment.apiUrl}/product/featured`)
+      // this is only for the purpose of the demo, in a real application you should remove this line
+      .pipe(catchError(() => of(MOCK_PRODUCTS)));
   };
 
   getRelatedProducts = (publicId: string): Observable<Product[]> => {
