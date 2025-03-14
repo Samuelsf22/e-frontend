@@ -47,3 +47,12 @@ npm install
 
 # Start the development server
 npm run dev
+
+## 🔗 Backend Connection
+
+This frontend application is designed to work with a backend built using **Spring WebFlux**.  
+If you want to test the full functionality, including authentication, product management, and checkout, you need to set up the backend service.
+
+👉 **Backend Repository:** [E-Commerce Backend (Spring WebFlux)](https://github.com/Samuelsf22/e-backend)
+
+By default, the frontend will display mock data when the backend is unavailable, ensuring a seamless experience even when offline.
