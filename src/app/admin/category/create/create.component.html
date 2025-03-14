@@ -1,0 +1,29 @@
+<div class="sm:max-w-[425px] flex flex-col gap-4">
+  <hlm-dialog-header>
+    <h3 hlmDialogTitle>Create Category</h3>
+    <p hlmDialogDescription>Enter the name of the category</p>
+  </hlm-dialog-header>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="sm:w-80 flex flex-col gap-4"
+  >
+    <hlm-form-field>
+      <input
+        aria-label="Name"
+        formControlName="name"
+        class="w-full"
+        hlmInput
+        type="text"
+        placeholder="Name"
+      />
+      <hlm-error> Name is required </hlm-error>
+    </hlm-form-field>
+    @if (create.error()){
+    <p (click)="create.reset()" class="text-destructive text-center text-sm">
+      Error server, try again
+    </p>
+    }
+    <button hlmBtn class="w-full" type="submit">Create</button>
+  </form>
+</div>

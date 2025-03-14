@@ -1,0 +1,104 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="col-span-1 md:col-span-3">
+    @if (cartQuery.isSuccess() && cartQuery.data().length > 0) {
+    <div class="space-y-4">
+      @for (cart of cartQuery.data(); track cart.public_id) {
+      <section
+        hlmCard
+        class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 p-4 gap-4"
+      >
+        <div class="col-span-1 flex items-center justify-center">
+          <img
+            [src]="cart.image_url"
+            alt="{{ cart.name }}"
+            width="125px"
+            class="object-contain"
+          />
+        </div>
+        <div class="col-span-2 md:col-span-3 lg:col-span-5">
+          <div
+            class="flex md:flex-row flex-col items-center justify-between h-full"
+          >
+            <div>
+              <h3 hlmCardTitle class="uppercase line-clamp-2">
+                {{ cart.name }}
+              </h3>
+              <p>{{ cart.brand }}</p>
+              <p class="text-xl font-semibold">
+                {{ cart.price | currency }}
+              </p>
+            </div>
+            <div class="flex gap-4 items-center">
+              <button
+                hlmBtn
+                variant="outline"
+                size="icon"
+                (click)="removeQuantityToCart(cart)"
+              >
+                <ng-icon name="featherMinus" size="16" />
+              </button>
+              <p>{{ cart.quantity }}</p>
+              <button
+                hlmBtn
+                variant="outline"
+                size="icon"
+                (click)="addQuantityToCart(cart)"
+              >
+                <ng-icon name="featherPlus" size="16" />
+              </button>
+              <button
+                hlmBtn
+                variant="destructive"
+                size="icon"
+                (click)="remove(cart.public_id)"
+              >
+                <ng-icon name="featherTrash2" size="16" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      }
+    </div>
+    }@else {
+    <div class="flex justify-center items-center text-center">
+      @if (cartQuery.isPending()) {
+      <hlm-spinner />
+
+      }@else if (cartQuery.isSuccess() && cartQuery.data().length === 0) {
+      <p hlmP>Your cart is empty</p>
+      }
+    </div>
+    }
+  </div>
+  <div class="col-span-1">
+    <section hlmCard>
+      <div hlmCardHeader>
+        <h3 hlmCardTitle>Summary</h3>
+        <p hlmCardDescription>
+          Review your selected items and order details before checkout
+        </p>
+      </div>
+      <div hlmCardContent class="-mt-4 space-y-4">
+        <brn-separator hlmSeparator />
+        <div class="flex justify-between">
+          <div>Delivery</div>
+          <div>{{ 0 | currency }}</div>
+        </div>
+        <brn-separator hlmSeparator />
+        <div class="flex justify-between font-bold">
+          <div>Total</div>
+          <div>{{ computeTotal() | currency }}</div>
+        </div>
+        <button
+          hlmBtn
+          class="w-full"
+          [disabled]="cartQuery.isSuccess() && cartQuery.data()!.length === 0"
+          (click)="checkout()"
+        >
+          Checkout
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

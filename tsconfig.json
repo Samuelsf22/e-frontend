@@ -57,6 +57,18 @@
       ],
       "@spartan-ng/ui-spinner-helm": [
         "./libs/ui/ui-spinner-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-checkbox-helm": [
+        "./libs/ui/ui-checkbox-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-separator-helm": [
+        "./libs/ui/ui-separator-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-table-helm": [
+        "./libs/ui/ui-table-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-select-helm": [
+        "./libs/ui/ui-select-helm/src/index.ts"
       ]
     }
   },

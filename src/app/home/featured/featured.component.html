@@ -4,21 +4,22 @@
     <p hlmCardDescription>Check out our featured products</p>
   </div>
   <div hlmCardContent>
-    <div class="flex justify-center items-center text-center">
-      @if(featuredProducts.isPending()){
-      <hlm-spinner />
-      <p hlmP>Loading...</p>
-      }@else if (featuredProducts.error()) {
-      <p hlmP>Error loading featured products</p>
-      }
-    </div>
-
     @if (featuredProducts.isSuccess()) {
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-4"
     >
       @for (product of featuredProducts.data(); track product.public_id) {
       <product-card [product]="product" />
+      }
+    </div>
+    
+    } @else {
+    <div class="flex justify-center items-center text-center">
+      @if(featuredProducts.isPending()){
+      <hlm-spinner />
+
+      }@else if (featuredProducts.error()) {
+      <p hlmP>Error loading featured products</p>
       }
     </div>
     }

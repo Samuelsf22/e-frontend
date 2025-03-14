@@ -1,0 +1,31 @@
+<section hlmCard class="bg-transparent shadow-none roun border-none">
+  @if (category.isSuccess()) {
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>{{ category.data().name }}</h3>
+    <p hlmCardDescription>Check out our products</p>
+  </div>
+  }
+  <div hlmCardContent>
+    <div class="w-full">
+      @if (products.isSuccess()) {
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-4"
+      >
+        @for (product of products.data(); track product.public_id) {
+        <product-card [product]="product" />
+        }
+      </div>
+      
+      }@else{
+      <div class="flex justify-center items-center text-center">
+        @if(products.isPending()){
+        <hlm-spinner />
+
+        }@else if (products.error()) {
+        <p hlmP>Error loading featured products</p>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</section>

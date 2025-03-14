@@ -1,0 +1,52 @@
+<section hlmCard>
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>Order Details</h3>
+    <p hlmCardDescription>Here you can see the details of your order.</p>
+  </div>
+  <div hlmCardContent>
+    <hlm-table class="overflow-x-auto">
+      <hlm-trow class="uppercase font-semibold">
+        <hlm-th class="w-80">Product ID</hlm-th>
+        <hlm-th class="w-80">Name</hlm-th>
+        <hlm-th class="w-24 lg:flex-1 justify-end">Quantity</hlm-th>
+        <hlm-th class="w-24 lg:flex-1 justify-end">Price</hlm-th>
+        <hlm-th class="w-24 lg:flex-1 justify-end">Amount</hlm-th>
+      </hlm-trow>
+      @for (detail of orderDetails.data(); track detail.product_public_id) {
+      <hlm-trow>
+        <hlm-td class="w-80">
+          <span class="uppercase line-clamp-1">{{
+            detail.product_public_id
+          }}</span>
+        </hlm-td>
+        <hlm-td class="w-80">
+          <span class="uppercase line-clamp-1">{{ detail.product_name }}</span>
+        </hlm-td>
+        <hlm-td class="w-24 lg:flex-1 justify-end">
+          {{ detail.quantity }}
+        </hlm-td>
+        <hlm-td class="w-24 lg:flex-1 justify-end">
+          {{ detail.price | currency }}
+        </hlm-td>
+        <hlm-td class="w-24 lg:flex-1 justify-end">
+          {{ detail.price * detail.quantity | currency }}
+        </hlm-td>
+      </hlm-trow>
+      }
+      <hlm-trow class="bg-primary/10 hover:bg-primary/20">
+        <hlm-td class="w-80 font-semibold">Total</hlm-td>
+        <hlm-td class="w-80"></hlm-td>
+        <hlm-td class="w-24 lg:flex-1"></hlm-td>
+        <hlm-td class="w-24 lg:flex-1"></hlm-td>
+        <hlm-td class="w-24 lg:flex-1 font-semibold justify-end">
+          {{ computeTotal() | currency }}
+        </hlm-td>
+      </hlm-trow>
+    </hlm-table>
+  </div>
+  @if (isPaid) {
+  <div hlmCardFooter class="justify-end">
+    <button hlmBtn class="w-20 md:w-56 lg:w-80" (click)="markOrderAsPaid()">Pay</button>
+  </div>
+  }
+</section>

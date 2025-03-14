@@ -2,41 +2,64 @@
   class="fixed flex items-center justify-between w-full backdrop-blur-md py-4 px-4"
 >
   <nav class="flex max-w-7xl mx-auto items-center justify-between w-full">
-    <a href="/"> <span class="text-2xl font-semibold">E-commerce</span></a>
+    <a [routerLink]="['/']">
+      <span class="text-2xl font-semibold">E-commerce</span></a
+    >
     <div>
-      <a href="/">
+      <a [routerLink]="['/']">
         <button hlmBtn variant="link" class="font-semibold">Home</button>
       </a>
       <button
         hlmBtn
         variant="link"
-        class="font-semibold"
+        class="font-semibold gap-2"
         [brnMenuTriggerFor]="categoriesMenu"
       >
         Products
+        <ng-icon name="featherChevronDown" />
       </button>
       <ng-template #categoriesMenu>
-        @if(categories.isPending()){
-        <hlm-spinner />
-        <p hlmP>Loading...</p>
-
-        }@else if (categories.error()) {
-        <p hlmP>Error: {{ categories.error() }}</p>
-
-        }@else {
         <hlm-menu>
-          @for (category of categories.data(); track category.public_id) {
-            <a
-              [routerLink]="['products/', category.public_id]"
-            >
-              <button hlmMenuItem class="flex items-center gap-4">
-                {{ category.name }}
-              </button>
-            </a>
+          @if (categories.isSuccess()){ @for (category of categories.data();
+          track category.public_id) {
+          <a [routerLink]="['/category', category.public_id]">
+            <button hlmMenuItem>
+              {{ category.name }}
+            </button>
+          </a>
+          }}@else {
+          <div class="flex justify-center items-center text-center">
+            @if(categories.isPending()){
+            <hlm-spinner />
+
+            }@else if (categories.error()) {
+            <p hlmP>Error</p>
+            }
+          </div>
           }
         </hlm-menu>
-        }
       </ng-template>
+      @if (isAdmin) {
+      <button
+        hlmBtn
+        variant="link"
+        class="font-semibold gap-2"
+        [brnMenuTriggerFor]="adminMenu"
+      >
+        Admin
+        <ng-icon name="featherChevronDown" />
+      </button>
+      <ng-template #adminMenu>
+        <hlm-menu>
+          <a [routerLink]="['/admin/category']">
+            <button hlmMenuItem>Categories</button>
+          </a>
+          <a [routerLink]="['/admin/product']">
+            <button hlmMenuItem>Products</button>
+          </a>
+        </hlm-menu>
+      </ng-template>
+      }
     </div>
     <div class="flex items-center">
       @if(!isSignedIn){
@@ -58,7 +81,7 @@
             <ng-icon name="featherUserCheck" />
             Sign In
           </button>
-          <a href="/signup">
+          <a [routerLink]="['/sign-up']">
             <button hlmMenuItem class="flex items-center gap-4">
               <ng-icon name="featherUserPlus" />
               Sign Up
@@ -72,6 +95,12 @@
       </button>
       <ng-template #userMenu>
         <hlm-menu>
+          <a [routerLink]="['/orders/user']">
+            <button hlmMenuItem class="flex items-center gap-4">
+              <ng-icon name="featherShoppingBag" />
+              Orders
+            </button>
+          </a>
           <button
             hlmMenuItem
             class="flex items-center gap-4"
@@ -83,7 +112,7 @@
         </hlm-menu>
       </ng-template>
       }
-      <a href="/orders">
+      <a [routerLink]="['/orders']">
         <button hlmBtn variant="link" align="end">
           <ng-icon name="featherShoppingCart" />
         </button>

@@ -1,0 +1,44 @@
+<section hlmCard>
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>Orders</h3>
+    <p hlmCardDescription>Here you can see all your orders</p>
+  </div>
+  <div hlmCardContent>
+    <hlm-table class="overflow-x-auto">
+      <hlm-trow class="uppercase font-semibold">
+        <hlm-th class="w-32 sm:w-96">ID</hlm-th>
+        <hlm-th class="w-24 sm:flex-1 justify-center">Status</hlm-th>
+        <hlm-th class="w-24 sm:flex-1 justify-center">Actions</hlm-th>
+      </hlm-trow>
+      @for (order of ordersUser.data(); track order.public_id) {
+      <hlm-trow>
+        <hlm-td class="w-32 sm:w-96">
+          <span class="uppercase line-clamp-1">{{ order.public_id }}</span>
+        </hlm-td>
+        <hlm-td class="w-24 sm:flex-1 justify-center font-semibold">
+          @if (order.status === 'PAID') {
+          <span class="text-green-600">{{ order.status }}</span>
+          } @else if (order.status === 'PENDING') {
+          <span class="text-yellow-600">{{ order.status }}</span>
+          }
+        </hlm-td>
+        <hlm-td class="w-24 sm:flex-1 justify-center">
+          @if (order.status ==='PAID' ) {
+          <a [routerLink]="['/orders', order.public_id]">
+            <button hlmBtn size="icon" variant="link" class="hover:scale-150 motion-safe:transition motion-reduce:any-hover:scale-100">
+              <ng-icon name="featherEye" />
+            </button>
+          </a>
+          } @if (order.status === 'PENDING') {
+          <a [routerLink]="['/orders', order.public_id, 'pay']">
+            <button hlmBtn size="icon" variant="link" class="hover:scale-150 motion-safe:transition motion-reduce:any-hover:scale-100">
+              <ng-icon name="featherCreditCard" />
+            </button>
+          </a>
+          }
+        </hlm-td>
+      </hlm-trow>
+      }
+    </hlm-table>
+  </div>
+</section>

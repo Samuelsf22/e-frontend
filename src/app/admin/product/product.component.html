@@ -1,0 +1,55 @@
+<section hlmCard>
+  <div
+    hlmCardHeader
+    class="flex flex-col sm:flex-row justify-between items-center"
+  >
+    <div class="w-full">
+      <h3 hlmCardTitle>Products</h3>
+      <p hlmCardDescription>Here you can see all your products</p>
+    </div>
+    <button hlmBtn class="sm:w-80 w-full" (click)="openCategoryCreate()">
+      Create
+    </button>
+  </div>
+  <div hlmCardContent>
+    <hlm-table class="overflow-x-auto">
+      <hlm-trow class="uppercase font-semibold">
+        <hlm-th class="w-36 sm:w-96">ID</hlm-th>
+        <hlm-th class="w-36 sm:w-96">Name</hlm-th>
+        <hlm-th class="w-24 xl:flex-1">Brand</hlm-th>
+        <hlm-th class="w-24 xl:flex-1 justify-end">Price</hlm-th>
+        <hlm-th class="w-24 xl:flex-1 justify-end">Stock</hlm-th>
+        <hlm-th class="w-24 xl:flex-1 justify-center">Actions</hlm-th>
+      </hlm-trow>
+      @for (product of products.data(); track product.public_id) {
+      <hlm-trow>
+        <hlm-td class="w-36 sm:w-96">
+          <span class="uppercase line-clamp-1">{{ product.public_id }}</span>
+        </hlm-td>
+        <hlm-td class="w-36 sm:w-96">
+          <span class="uppercase line-clamp-1">{{ product.name }}</span>
+        </hlm-td>
+        <hlm-td class="w-24 xl:flex-1">
+          <span class="uppercase line-clamp-1">{{ product.brand }}</span>
+        </hlm-td>
+        <hlm-td class="w-24 xl:flex-1 justify-end">
+          {{ product.price | currency }}
+        </hlm-td>
+        <hlm-td class="w-24 xl:flex-1 justify-end">
+          {{ product.stock }}
+        </hlm-td>
+        <hlm-td class="w-24 xl:flex-1 justify-center">
+          <button
+            hlmBtn
+            variant="destructive"
+            size="icon"
+            (click)="onDelete(product.public_id)"
+          >
+            <ng-icon name="featherTrash2" />
+          </button>
+        </hlm-td>
+      </hlm-trow>
+      }
+    </hlm-table>
+  </div>
+</section>

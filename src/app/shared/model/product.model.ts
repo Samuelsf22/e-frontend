@@ -1,5 +1,4 @@
 export interface Category {
-  id: number;
   public_id: string;
   name: string;
 }
@@ -13,6 +12,25 @@ export interface Product {
   price: number;
   featured: boolean;
   stock: number;
-  picture_url: string;
-  category_id: number;
+  image_url: string;
+}
+
+export interface CreateProduct {
+  name: string;
+  description: string;
+  brand: string;
+  color: string;
+  price: number;
+  featured: boolean;
+  stock: number;
+  category_public_id: string;
+}
+
+export interface CartItem {
+  public_id: string;
+  name: string;
+  brand: string;
+  price: number;
+  image_url: string;
+  quantity?: number;
 }

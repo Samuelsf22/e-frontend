@@ -10,7 +10,6 @@ import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
 } from '@spartan-ng/brain/forms';
-import { BrnDialogComponent } from '@spartan-ng/brain/dialog';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
   HlmDialogDescriptionDirective,
@@ -47,14 +46,9 @@ import { HlmPDirective } from '@spartan-ng/ui-typography-helm';
 export class SigninComponent {
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
-  public viewchildDialogRef = viewChild(BrnDialogComponent);
-
-  closeDialog() {
-    this.viewchildDialogRef()?.close({});
-  }
 
   form = this._formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
+    username: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
 
@@ -68,7 +62,7 @@ export class SigninComponent {
   onSubmitLogin = () => {
     if (this.form.valid) {
       this.loginMutation.mutate({
-        email: this.form.value.email!,
+        username: this.form.value.username!,
         password: this.form.value.password!,
       });
     } else {

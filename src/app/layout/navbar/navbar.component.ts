@@ -18,6 +18,8 @@ import {
   featherUser,
   featherLogOut,
   featherShoppingCart,
+  featherChevronDown,
+  featherShoppingBag,
 } from '@ng-icons/feather-icons';
 
 import { AuthService } from '@service/auth.service';
@@ -48,6 +50,8 @@ import { lastValueFrom } from 'rxjs';
       featherUser,
       featherLogOut,
       featherShoppingCart,
+      featherChevronDown,
+      featherShoppingBag,
     }),
   ],
 })
@@ -70,4 +74,6 @@ export class NavbarComponent {
     queryKey: ['categories'],
     queryFn: () => lastValueFrom(this.categoryService.getCategories()),
   }));
+
+  protected readonly isAdmin: boolean = this.authService.getIsAdmin();
 }
